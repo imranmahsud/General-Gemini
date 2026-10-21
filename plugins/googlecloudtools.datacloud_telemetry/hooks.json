@@ -1,0 +1,5 @@
+{
+  "googlecloudtools.datacloud_telemetry": {
+    "enabled": false
+  }
+}

@@ -1,0 +1,21 @@
+# Git ignore for Antigravity Gemini Skills & Plugins Repository
+*.log
+*.tmp
+*.bak
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Build artifacts
+bin/
+obj/
+*.class
+*.jar
+*.suo
+*.user
