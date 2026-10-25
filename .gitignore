@@ -2,10 +2,20 @@
 *.log
 *.tmp
 *.bak
+*.backup
 __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+
+# Cloned upstream external repositories (installed separately or via install-apps.ps1)
+/rea/
+/awesome-reverse-engineering/
+/REA-Prompts/
+
+# Node & package manager directories
+node_modules/
+.npm/
 
 # Virtual environments
 .venv/
@@ -19,3 +29,4 @@ obj/
 *.jar
 *.suo
 *.user
+

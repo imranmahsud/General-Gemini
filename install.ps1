@@ -94,26 +94,38 @@ if (Test-Path (Split-Path -Parent $qgisPluginsDir)) {
     Write-Host "  ! QGIS profile not detected yet. Plugins will configure once QGIS is run." -ForegroundColor Gray
 }
 
-# 5. Check & Auto-Install Core Engineering Winget Tools
+# 5. Check & Auto-Install Core Engineering & Runtime Packages
 Write-Host ""
-Write-Host "[5/6] Verifying & Installing Core Engineering Packages via Winget..." -ForegroundColor Yellow
+Write-Host "[5/6] Verifying Toolchains & Runtime Packages..." -ForegroundColor Yellow
 Write-Host "----------------------------------------------------------"
 
-function Ensure-WingetPackage ($Name, $Command, $WingetId) {
+function Ensure-Tool ($Name, $Command, $InstallHint) {
     try {
-        $cmd = Get-Command $Command -ErrorAction Stop
+        $result = & (Get-Command $Command -ErrorAction Stop) --version 2>$null
+        if (-not $result) { $result = & (Get-Command $Command -ErrorAction Stop) -v 2>$null }
         Write-Host " [OK]  $Name is installed." -ForegroundColor Green
     } catch {
-        Write-Host " [INSTALLING] $Name not found. Installing $WingetId via winget..." -ForegroundColor Cyan
-        winget install --id $WingetId --silent --accept-package-agreements --accept-source-agreements
+        Write-Host " [NOTICE] $Name not detected in PATH." -ForegroundColor DarkYellow
+        Write-Host "          Install hint: $InstallHint" -ForegroundColor Gray
     }
 }
 
-Ensure-WingetPackage "Git for Windows" "git" "Git.Git"
-Ensure-WingetPackage "Typst Compiler" "typst" "Typst.Typst"
-Ensure-WingetPackage "EPA SWMM 5.2" "epaswmm5" "EPA.SWMM"
-Ensure-WingetPackage "EPANET 2.2" "runepanet" "USEPA.EPANET"
-Ensure-WingetPackage "ProjectLibre" "projectlibre" "ProjectLibre.ProjectLibre"
+Ensure-Tool "Git for Windows" "git" "winget install Git.Git or choco install git"
+Ensure-Tool "Python 3" "python" "winget install Python.Python.3.12 or choco install python"
+Ensure-Tool "Typst Compiler" "typst" "winget install Typst.Typst"
+Ensure-Tool "Astral uv" "uv" "powershell -c 'irm https://astral.sh/uv/install.ps1 | iex'"
+Ensure-Tool ".NET SDK" "dotnet" "winget install Microsoft.DotNet.SDK.10 (or SDK.8)"
+Ensure-Tool "Java JDK" "javac" "choco install openjdk21 or winget install Oracle.JDK.21"
+Ensure-Tool "Google Cloud CLI" "gcloud" "winget install Google.CloudSDK or choco install gcloudsdk"
+Ensure-Tool "Android CLI / ADB" "adb" "choco install adb or install via Android Studio"
+Ensure-Tool "Ghidra" "ghidra" "choco install ghidra"
+Ensure-Tool "Wireshark" "wireshark" "choco install wireshark"
+Ensure-Tool "JADX Decompiler" "jadx" "choco install jadx"
+Ensure-Tool "Rizin" "rizin" "choco install rizin or install to C:\tools\rizin"
+
+Write-Host "----------------------------------------------------------"
+Write-Host "For a one-click automated installation of all software, run:" -ForegroundColor Cyan
+Write-Host "  powershell -ExecutionPolicy Bypass -File .\install-apps.ps1" -ForegroundColor Yellow
 
 # 6. Python Civil & PC-1 Engineering Virtual Environment
 Write-Host ""
@@ -138,11 +150,14 @@ if ($pyCmd) {
 
 Write-Host ""
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host "Setup Completed! Your new machine is ready for:" -ForegroundColor Green
+Write-Host "Setup Completed! Your machine is ready for:" -ForegroundColor Green
 Write-Host "  * Antigravity & Gemini Autonomous Agent Workflows" -ForegroundColor White
+Write-Host "  * Reverse Engineering Suite (REA, Ghidra, Wireshark, JADX)" -ForegroundColor White
 Write-Host "  * GIS Mapping, Elevation Contours & 3D Terrain Analysis" -ForegroundColor White
 Write-Host "  * EPA-SWMM Drainage & EPANET Water Distribution Modeling" -ForegroundColor White
 Write-Host "  * HEC-RAS 7.0 River Hydraulics & Flood Inundation" -ForegroundColor White
+Write-Host "  * CAD & BIM Architectural Modeling (Revit, SketchUp, Sweet Home 3D)" -ForegroundColor White
 Write-Host "  * PC-1 Feasibility Studies, BOQ, EIRR/BCR & Typst Reports" -ForegroundColor White
 Write-Host "  * Full Handbook: docs\engineering_applications_master_handbook.md" -ForegroundColor Cyan
+Write-Host "  * Full Apps Catalog: APPS_LIST.md" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
