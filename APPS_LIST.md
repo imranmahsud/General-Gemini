@@ -158,6 +158,19 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 
 ---
 
+### 12. Media AI, Audiobook Generation & Video Localization Suite
+| Tool / Package | Purpose | Installation / Command |
+| :--- | :--- | :--- |
+| **FFmpeg** | Multimedia transcoding, muxing, audio processing & subtitle burning | `choco install ffmpeg -y` |
+| **audiblez** | Offline neural audiobook compiler from EPUB/PDF (Kokoro-82M TTS) | `pip install audiblez` & `C:\tools\media-ai\audiblez` |
+| **rembg** | Zero-cloud AI image background removal (U2-Net, ONNX Runtime) | `pip install "rembg[cpu,cli]"` & `C:\tools\media-ai\rembg` |
+| **pyVideoTrans** | Multilingual video translation, voice dubbing & subtitle sync (Whisper + Edge-TTS) | Cloned in `C:\tools\media-ai\pyvideotrans` (`uv run webui.py`) |
+| **audiblez skill** | Agent skill for neural audiobook conversion | Agent skill in `skills/audiblez` |
+| **rembg-cli skill** | Agent skill for photo background cutout | Agent skill in `skills/rembg-cli` |
+| **pyvideotrans skill** | Agent skill for video dubbing & subtitle workflows | Agent skill in `skills/pyvideotrans` |
+
+---
+
 ## 📋 Installed Chocolatey Packages Snapshot
 
 Exported directly from `docs/installed_choco_packages.txt`:

@@ -33,7 +33,8 @@ $devPackages = @(
     "python",
     "nodejs-lts",
     "openjdk21",
-    "dotnet-sdk"
+    "dotnet-sdk",
+    "ffmpeg"
 )
 
 foreach ($pkg in $devPackages) {

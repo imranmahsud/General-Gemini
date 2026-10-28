@@ -6,6 +6,7 @@ chocolatey-windowsupdate.extension|1.0.5
 dotnet-10.0-sdk|10.0.402
 dotnet-10.0-sdk-4xx|10.0.402
 dotnet-sdk|10.0.402
+ffmpeg|9.0.2
 flutter|3.47.4
 ghidra|12.2.0
 git|2.56.0.3
