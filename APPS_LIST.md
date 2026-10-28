@@ -111,6 +111,49 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 
 ---
 
+---
+
+### 8. Business Intelligence & Data Visualization
+| Tool / Platform | Purpose | Command / Installation |
+| :--- | :--- | :--- |
+| **Apache Superset** | Enterprise BI web application & dashboards | Git: `C:\tools\superset` / Docker: `docker-compose-non-dev.yml` |
+| **superset-api-client** | Python SDK for automated Superset dashboards & SQL Lab | `pip install superset-api-client` |
+| **QGIS 4.x / 3.x** | GIS mapping, cartography, elevation models | `winget install QGIS.QGIS` |
+
+---
+
+### 9. Civil, Water & Environmental Engineering
+| Tool / Package | Purpose | Installation / Command |
+| :--- | :--- | :--- |
+| **PySWMM** | US EPA Stormwater Management Model Python API | `pip install pyswmm` |
+| **swmmio** | Drainage network bottleneck analysis & GeoJSON export | `pip install swmmio` |
+| **WNTR** | US EPA Water Network Tool for Resilience (EPANET) | `pip install wntr` |
+| **WhiteboxTools** | Headless GIS hydrology & digital elevation processing | `pip install whitebox` |
+
+---
+
+### 10. Rust Toolchains & Agent Compilation Stack
+| Tool / Binary | Purpose | Installation / Command |
+| :--- | :--- | :--- |
+| **rust-analyzer** | Official Rust Language Server Protocol (LSP) | `rustup component add rust-analyzer` |
+| **cargo-nextest** | Isolated next-gen test runner with JSON reporting | `winget install nextest.cargo-nextest` |
+| **sccache** | Mozilla compiler cache for rapid incremental rebuilds | `winget install Mozilla.sccache` |
+| **cargo-expand** | Macro expansion debugger for derive & proc macros | `cargo binstall cargo-expand` |
+| **cargo-audit** | Vulnerability security scanner (RustSec Advisory DB) | `cargo binstall cargo-audit` |
+| **cargo-deny** | Dependency graph, licensing & crate ban auditor | `cargo binstall cargo-deny` |
+| **rust-mcp-server** | 33-tool Model Context Protocol server for Rust | Built to `~/.cargo/bin/rust-mcp-server.exe` |
+
+---
+
+### 11. Technical Report Writing & PC-1 Feasibility
+| Tool / Package | Purpose | Installation / Command |
+| :--- | :--- | :--- |
+| **Typst Compiler** | Lightning-fast markup typesetter for reports | `winget install Typst.Typst` |
+| **modern-project-report** | Engineering project report framework | `typst init @preview/modern-project-report` |
+| **reprobe / breezy-report** | Two-column and modular technical report templates | Cloned in `C:\tools\engineering-reports\` |
+
+---
+
 ## 📋 Installed Chocolatey Packages Snapshot
 
 Exported directly from `docs/installed_choco_packages.txt`:
