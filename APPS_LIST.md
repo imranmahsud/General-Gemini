@@ -120,13 +120,19 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 
 ---
 
-### 9. Civil, Water & Environmental Engineering
+### 9. Civil, Water, Hydraulics & River Engineering
 | Tool / Package | Purpose | Installation / Command |
 | :--- | :--- | :--- |
-| **PySWMM** | US EPA Stormwater Management Model Python API | `pip install pyswmm` |
-| **swmmio** | Drainage network bottleneck analysis & GeoJSON export | `pip install swmmio` |
-| **WNTR** | US EPA Water Network Tool for Resilience (EPANET) | `pip install wntr` |
-| **WhiteboxTools** | Headless GIS hydrology & digital elevation processing | `pip install whitebox` |
+| **PySWMM** | US EPA Stormwater Management Model Python API | pip install pyswmm |
+| **swmmio** | Drainage network bottleneck analysis & GeoJSON export | pip install swmmio |
+| **WNTR** | US EPA Water Network Tool for Resilience (EPANET) | pip install wntr |
+| **WhiteboxTools** | Headless GIS hydrology & digital elevation processing | pip install whitebox |
+| **open_channel** | Python open-channel hydraulics (Manning, GVF, jumps) | Cloned in C:\\tools\\civil-hydraulics\\open_channel |
+| **ChannelFlowLib** | Channel geometry and Manning cross-section library | Cloned in C:\\tools\\civil-hydraulics\\ChannelFlowLib |
+| **PyQGIS Cookbook** | Automated headless QGIS scripting recipes | Cloned in C:\\tools\\qgis-civil\\qgis-cookbook |
+| **canal-and-drain-hydraulics** | Lacey alluvial regime, Kennedy CVR & drain design | Agent skill in skills/canal-and-drain-hydraulics |
+| **river-training-and-flood-protection** | Spurs, guide bunds, Lacey scour, launching apron | Agent skill in skills/river-training-and-flood-protection |
+| **civil-boq-and-cost-estimation** | CSR/NHA item rate analysis, mass-haul & BOQs | Agent skill in skills/civil-boq-and-cost-estimation |
 
 ---
 
