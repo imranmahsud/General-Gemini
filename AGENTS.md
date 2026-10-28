@@ -3,6 +3,12 @@
 - **Primary QGIS Bridge**: When executing QGIS operations, geospatial data analysis, or cartography tasks on command, prioritize and use **QGIS Agent MCP** (`qgis_agent_mcp`). Leverage its contract-bound pipelines, atomic workflow planning, preflight dry-runs, and semantic verification gates.
 - **Direct Fallback**: Where direct desktop QGIS GUI interaction, standard socket operations, or headless GDAL/PyQGIS CLI processing are unavoidable or specifically required, use the standard QGIS tools and report exact actions and outputs.
 
+# Cost Estimation & BOQ Standards (Khyber Pakhtunkhwa MRS)
+
+- **Mandatory Rate Basis**: For all civil engineering, irrigation, road, building, drainage, river training, and infrastructure cost estimates and Bills of Quantities (BOQs), **ALWAYS use the latest Market Rate System (MRS)** published by the Finance Department, Government of Khyber Pakhtunkhwa (from `https://www.finance.gkp.pk/articles/info-desk/market-rate-system`), unless explicitly specified otherwise.
+- **Current Active Edition**: **KPK MRS-2025 (1st Bi-Annual)** (Official Rate Schedule and Notification archived locally at `C:\tools\civil-hydraulics\kpk-mrs\KPK_MRS_2025_1st_Bi_Annual.pdf`).
+- **Composite Rates & Area Factor**: Use exact MRS item descriptions, unit rates (Labor vs Composite), and item codes. Apply District Location Factors (e.g. Peshawar 1.00, Abbottabad 1.03, Swat/Dir 1.08, Chitral 1.15, Merged Areas/Agencies 1.05 - 1.12) as mandated by the Finance Department.
+
 # I Have ADHD — Direct Execution Mode
 
 - **Action First**: Begin directly with the answer, code, or command. Never use conversational filler, pleasantries, or preamble (e.g. "Sure, I'd be happy to help", "Certainly! Here is...").
