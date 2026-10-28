@@ -28,6 +28,13 @@ if (-not (Test-Path $TargetPluginsDir)) {
     Write-Host "  + Created: $TargetPluginsDir" -ForegroundColor Green
 }
 
+# 1b. Global Agent Rules
+$sourceAgents = Join-Path $SourceDir "AGENTS.md"
+if (Test-Path $sourceAgents) {
+    Copy-Item -Path $sourceAgents -Destination (Join-Path $GeminiConfigDir "AGENTS.md") -Force
+    Write-Host "  + Deployed global agent rules: $GeminiConfigDir\AGENTS.md" -ForegroundColor Green
+}
+
 # 2. Copy Skills
 Write-Host ""
 Write-Host "[2/6] Deploying Skills to $TargetSkillsDir..." -ForegroundColor Yellow
@@ -141,7 +148,13 @@ if ($pyCmd) {
     if (Test-Path $pipPath) {
         Write-Host "  -> Installing Python engineering packages (pandas, geopandas, scipy, openpyxl, python-docx, matplotlib, ezdxf, h5py, whitebox)..." -ForegroundColor Green
         & $pipPath install --upgrade pip --quiet
-        & $pipPath install pandas openpyxl python-docx matplotlib geopandas shapely ezdxf h5py whitebox scipy --quiet
+        $reqFile = Join-Path $SourceDir "requirements.txt"
+        if (Test-Path $reqFile) {
+            Write-Host "  -> Installing packages from requirements.txt..." -ForegroundColor Green
+            & $pipPath install -r $reqFile --quiet
+        } else {
+            & $pipPath install pandas openpyxl python-docx matplotlib geopandas shapely ezdxf h5py whitebox scipy --quiet
+        }
         Write-Host "  -> Python Engineering Stack is fully configured!" -ForegroundColor Green
     }
 } else {

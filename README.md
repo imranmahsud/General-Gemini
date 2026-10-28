@@ -28,7 +28,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 This script automatically:
 * Creates `$HOME\.gemini\config\skills` and `$HOME\.gemini\config\plugins`
-* Deploys all 39 custom skills and 8 plugins into active Antigravity/Gemini discovery paths
+* Deploys all 380+ custom skills (including Everything Claude Code suite, Superpowers, Day Trader, UI/UX Pro Max, Brand/Design systems) and 8 plugins into active Antigravity/Gemini discovery paths
 * Clones QGIS civil engineering plugins (`quick_map_services` + satellite packs, `profiletool`, `Qgis2threejs`)
 * Configures the Python Civil & PC-1 Engineering virtual environment (`pandas`, `geopandas`, `scipy`, `openpyxl`, `python-docx`, `matplotlib`, `ezdxf`, `h5py`, `whitebox`)
 * Verifies developer, reverse-engineering, and CAD/BIM toolchains
