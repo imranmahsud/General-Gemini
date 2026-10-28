@@ -116,8 +116,6 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 ### 8. Business Intelligence & Data Visualization
 | Tool / Platform | Purpose | Command / Installation |
 | :--- | :--- | :--- |
-| **Apache Superset** | Enterprise BI web application & dashboards | Git: `C:\tools\superset` / Docker: `docker-compose-non-dev.yml` |
-| **superset-api-client** | Python SDK for automated Superset dashboards & SQL Lab | `pip install superset-api-client` |
 | **QGIS 4.x / 3.x** | GIS mapping, cartography, elevation models | `winget install QGIS.QGIS` |
 
 ---
