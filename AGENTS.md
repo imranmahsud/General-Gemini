@@ -24,3 +24,10 @@
   - *AI jargon*: "delve", "testament to", "rich tapestry", "spearhead", "beacon", "foster", "pivotal role".
   - *Generic filler*: "comprehensive guide", "seamlessly integrate", "embark on a journey".
 - **Tone**: Write plainly, concisely, and naturally. Use concrete evidence and precise technical language. Treat the reader like a seasoned engineer or professional.
+
+
+# Master Backup & Skills Repository Standard
+
+- **Default Remote**: **`https://github.com/imranmahsud/General-Gemini`**
+- **Mandatory Backup Target**: Whenever new skills, plugins, application lists, dependencies, or PC configuration details are created, updated, or audited, **always sync, commit, and push them to `https://github.com/imranmahsud/General-Gemini`**.
+- **New PC Restoration**: Always reference and use the one-click restoration scripts (`restore_skills.py` / `restore_skills.ps1`) in `General-Gemini` to recreate the exact environment on any new workstation.
