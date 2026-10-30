@@ -1,0 +1,14 @@
+{
+  "name": "antigravity-curated-skills",
+  "version": "1.0.0",
+  "description": "Curated production AI coding agent skills with automated one-click restore for Antigravity, Claude Code, and Gemini CLI.",
+  "scripts": {
+    "restore": "python restore_skills.py"
+  },
+  "dependencies": {
+    "impeccable": "^4.8.0",
+    "understand-anything-mcp": "^2.7.8"
+  },
+  "author": "Imran",
+  "license": "MIT"
+}
