@@ -34,6 +34,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 | **Ollama** | 0.40.14 | Local LLM engine (runs Qwen 2.5 Coder & Llama 3.2 offline) | Installed to `AppData\Local\Programs\Ollama` |
 | **pnpm** | 12.16+ | Fast disk-efficient package manager for agent IDEs | `npm install -g --allow-scripts=pnpm pnpm` |
 | **Git for Windows** | 2.53+ | Version control & skill repo sync | `choco install git -y` or `winget install Git.Git` |
+| **GitHub CLI (`gh`)** | 2.103.3 | GitHub authentication, PR creation & worktree review | `winget install GitHub.cli` (installed in `Program Files\GitHub CLI`) |
 | **Python** | 3.12 / 3.14.7 | Agent scripting, BigFrames, ML & science | `choco install python -y` or `winget install Python.Python.3.12` |
 | **Astral uv** | 0.9+ | High-performance Python package manager | `powershell -c "irm https://astral.sh/uv/install.ps1 \| iex"` |
 | **Node.js (LTS)** | 22.x+ | REA server, MCP servers, web guidance | `choco install nodejs-lts -y` |
