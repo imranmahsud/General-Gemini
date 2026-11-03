@@ -26,12 +26,6 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 | Software / Tool | Version Tested | Purpose | Installation Command / Link |
 | :--- | :--- | :--- | :--- |
 | **Google Antigravity IDE** | 2.26.0+ | Primary agentic AI coding environment | Installed via Google internal / installer |
-| **Orca ADE** | 1.4.247 | Multi-agent orchestrator & parallel worktrees (Codex/ClaudeCode) | Installed to `AppData\Local\Programs\orca`, repo at `D:\AI-Folders\orca` |
-| **Claude Code** | 2.1.317 | Anthropic agentic coding CLI (`claude`) | `npm install -g @anthropic-ai/claude-code` |
-| **OpenAI Codex** | 0.166.0 | OpenAI agentic developer CLI (`codex`) | `npm install -g @openai/codex` |
-| **Google Gemini CLI** | 0.66.0 | Google Gemini developer CLI (`gemini`) | `npm install -g @google/gemini-cli` |
-| **OpenCode AI** | 1.19.5 | Multi-model agent CLI (`opencode` - DeepSeek/Claude/GPT/Ollama) | `npm install -g opencode-ai` |
-| **Ollama** | 0.40.14 | Local LLM engine (runs Qwen 2.5 Coder & Llama 3.2 offline) | Installed to `AppData\Local\Programs\Ollama` |
 | **pnpm** | 12.16+ | Fast disk-efficient package manager for agent IDEs | `npm install -g --allow-scripts=pnpm pnpm` |
 | **Git for Windows** | 2.53+ | Version control & skill repo sync | `choco install git -y` or `winget install Git.Git` |
 | **GitHub CLI (`gh`)** | 2.103.3 | GitHub authentication, PR creation & worktree review | `winget install GitHub.cli` (installed in `Program Files\GitHub CLI`) |
