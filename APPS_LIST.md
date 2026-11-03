@@ -26,6 +26,8 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 | Software / Tool | Version Tested | Purpose | Installation Command / Link |
 | :--- | :--- | :--- | :--- |
 | **Google Antigravity IDE** | 2.26.0+ | Primary agentic AI coding environment | Installed via Google internal / installer |
+| **Orca ADE** | 1.4.247 | Multi-agent orchestrator & parallel worktrees (Codex/ClaudeCode) | Installed to `AppData\Local\Programs\orca`, repo at `D:\AI-Folders\orca` |
+| **pnpm** | 12.16+ | Fast disk-efficient package manager for agent IDEs | `npm install -g --allow-scripts=pnpm pnpm` |
 | **Git for Windows** | 2.53+ | Version control & skill repo sync | `choco install git -y` or `winget install Git.Git` |
 | **Python** | 3.12 / 3.14.7 | Agent scripting, BigFrames, ML & science | `choco install python -y` or `winget install Python.Python.3.12` |
 | **Astral uv** | 0.9+ | High-performance Python package manager | `powershell -c "irm https://astral.sh/uv/install.ps1 \| iex"` |
