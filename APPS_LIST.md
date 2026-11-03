@@ -168,6 +168,7 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 | **audiblez skill** | Agent skill for neural audiobook conversion | Agent skill in `skills/audiblez` |
 | **rembg-cli skill** | Agent skill for photo background cutout | Agent skill in `skills/rembg-cli` |
 | **pyvideotrans skill** | Agent skill for video dubbing & subtitle workflows | Agent skill in `skills/pyvideotrans` |
+| **MoneyPrinterTurbo** | Automated AI video generator (LLM scripts + Edge TTS + auto-subtitles + 9:16 rendering) | Cloned to `D:\AI-Folders\MoneyPrinterTurbo`, skill in `skills/moneyprinterturbo` |
 
 ---
 
