@@ -171,6 +171,9 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 | **rembg-cli skill** | Agent skill for photo background cutout | Agent skill in `skills/rembg-cli` |
 | **pyvideotrans skill** | Agent skill for video dubbing & subtitle workflows | Agent skill in `skills/pyvideotrans` |
 | **MoneyPrinterTurbo** | Automated AI video generator (LLM scripts + Edge TTS + auto-subtitles + 9:16 rendering) | Cloned to `D:\AI-Folders\MoneyPrinterTurbo`, skill in `skills/moneyprinterturbo` |
+| **FreeVideo** | Local AI video diffusion engine (Video DeltaNet / MiniMax H3) | Installed in `C:\tools\media-ai\freevideo\FreeVideo.exe` |
+| **OpenWhispr** | Privacy-first local voice-to-text dictation, meeting notes & audio transcription | Installed in `C:\Users\Imran\AppData\Local\Programs\OpenWhispr\OpenWhispr.exe` |
+| **character-timeline-animation skill** | Agent skill for 2D/3D character design consistency & 5-parameter timeline prompts | Agent skill in `skills/character-timeline-animation` |
 
 ---
 

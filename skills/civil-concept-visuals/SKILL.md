@@ -24,6 +24,10 @@ Activate this skill whenever the user requests:
 
 ### Archetype 1: Google Earth Aerial Concept Visualisation
 **Purpose**: High-level corridor planning, PC-I presentations, and public stakeholder alignments.
+**Reference Plates** (archived locally in `resources/`):
+- `resources/01_alamabad_northern_crossing.png`: Bridge crossing arrangement at CH 0+000 over Bahr Khwar, 2 m raised embankment, 7.315 m roadway formation, and stone pitching armor.
+- `resources/02_alamabad_middle_corridor.png`: Embankment corridor through Wahdat Abad village, center-line alignment, and 2H:1V side slopes.
+- `resources/04_alamabad_alignment_overview.png`: Full 3.086 km corridor alignment (CH 0+000 to CH 3+086) with Google Earth markers, legend, and stationing.
 **Visual Style**:
 - Oblique aerial perspective looking down at 45° to 65° onto Google Earth satellite imagery.
 - Top banner: Dark semi-transparent pill (`rgba(20,20,20,0.85)`) with white bold text (e.g. `ALAMABAD NORTHERN CROSSING`, `ALAMABAD MIDDLE CORRIDOR`).
