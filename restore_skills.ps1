@@ -28,10 +28,18 @@ Get-ChildItem -Path $SourceDir -Directory | ForEach-Object {
 
 Write-Host "`nInstalling global dependencies..." -ForegroundColor Yellow
 try {
-    npm.cmd install -g impeccable@^4.8.0 understand-anything-mcp@^2.7.8
+    npm.cmd install -g impeccable@^4.8.0 understand-anything-mcp@^2.7.8 hyperframes@^0.9.16 @remotion/cli@^4.0.541 remotion@^4.0.541
     Write-Host "  [OK] Global CLI packages installed." -ForegroundColor Green
 } catch {
     Write-Warning "Global npm install notice: $_"
+}
+
+Write-Host "`nInstalling Faster-Whisper CLI..." -ForegroundColor Yellow
+try {
+    uv tool install --python 3.12 whisper-ctranslate2
+    Write-Host "  [OK] whisper-ctranslate2 installed." -ForegroundColor Green
+} catch {
+    Write-Warning "uv tool install notice: $_"
 }
 
 Write-Host "`nAll skills restored and verified!" -ForegroundColor Cyan

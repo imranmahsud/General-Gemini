@@ -49,14 +49,28 @@ def main():
                 print(f"  [OK] Restored skill: {item} (ID: {name})")
 
     # Install global npm dependencies
-    print("\nInstalling global dependencies (impeccable, understand-anything-mcp)...")
+    print("\nInstalling global dependencies (impeccable, understand-anything, hyperframes, remotion)...")
     npm_cmd = "npm.cmd" if sys.platform == "win32" else "npm"
+    npm_pkgs = [
+        "impeccable@^4.8.0",
+        "understand-anything-mcp@^2.7.8",
+        "hyperframes@^0.9.16",
+        "@remotion/cli@^4.0.541",
+        "remotion@^4.0.541"
+    ]
     try:
-        subprocess.run([npm_cmd, "install", "-g", "impeccable@^4.8.0", "understand-anything-mcp@^2.7.8"], check=True)
+        subprocess.run([npm_cmd, "install", "-g"] + npm_pkgs, check=True)
         print("  [OK] Global CLI tools installed successfully.")
     except Exception as e:
         print(f"  [WARN] Note on npm global install: {e}")
-        print("  You can run 'npm install -g impeccable understand-anything-mcp' manually.")
+
+    # Install faster-whisper (whisper-ctranslate2) via uv
+    print("\nInstalling Faster-Whisper CLI (whisper-ctranslate2)...")
+    try:
+        subprocess.run(["uv", "tool", "install", "--python", "3.12", "whisper-ctranslate2"], check=True)
+        print("  [OK] whisper-ctranslate2 installed successfully.")
+    except Exception as e:
+        print(f"  [WARN] Note on whisper-ctranslate2 install: {e}")
 
     print("\n==================================================")
     print(" Skills restoration complete! Ready to use on this PC.")
