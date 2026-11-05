@@ -172,7 +172,12 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 | **pyvideotrans skill** | Agent skill for video dubbing & subtitle workflows | Agent skill in `skills/pyvideotrans` |
 | **MoneyPrinterTurbo** | Automated AI video generator (LLM scripts + Edge TTS + auto-subtitles + 9:16 rendering) | Cloned to `D:\AI-Folders\MoneyPrinterTurbo`, skill in `skills/moneyprinterturbo` |
 | **FreeVideo** | Local AI video diffusion engine (Video DeltaNet / MiniMax H3) | Installed in `C:\tools\media-ai\freevideo\FreeVideo.exe` |
+| **OpenWhispr** | Privacy-first local voice-to-text dictation, meeting notes & audio transcription | Installed in `C:\Users\Imran\AppData\Local\Programs\OpenWhispr\OpenWhispr.exe` |
+| **Remotion** | Programmatic React-based deterministic video rendering engine | Global npm package `@remotion/cli` & `remotion` (`remotion.cmd`) |
+| **HyperFrames** | HTML/CSS and GSAP timeline to MP4/WebM video compiler | Global npm package `hyperframes` (`hyperframes.cmd`) |
+| **Faster-Whisper** | Fast, offline word-level timestamped subtitle extractor on CPU (int8) | CLI tool `whisper-ctranslate2` (`uv tool install --python 3.12 whisper-ctranslate2`) |
 | **character-timeline-animation skill** | Agent skill for 2D/3D character design consistency & 5-parameter timeline prompts | Agent skill in `skills/character-timeline-animation` |
+| **programmatic-video skill** | Agent skill for headless code-to-video and subtitle workflows | Agent skill in `skills/programmatic-video` |
 
 ---
 
