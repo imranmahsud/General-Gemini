@@ -70,6 +70,25 @@ Activate this skill whenever the user requests:
   - Carriageway blacktop width callout (e.g., `18 ft blacktop / 5.486 m`) with 2% crown camber.
   - Pavement structural layers annotation: `50 mm asphalt wearing course + 150 mm base + 200 mm subbase`.
 
+### Archetype 4: Master Full-Corridor Satellite Map Plate (Single Large Image)
+**Purpose**: Comprehensive corridor presentations, executive approvals, environmental no-objection certificates (NOC), and administrative PC-I submissions.
+**Visual Style**:
+- High-resolution master plate (e.g., $2160 \times 3000$ px portrait or widescreen) showing the entire project alignment from `CH 0+000` to end in a single cohesive view.
+- 100% georeferenced satellite base imagery enhanced with unsharp masking and tonal contrast.
+- 2x Supersampled anti-aliased (SSAA) 3D civil rendering:
+  - 3D soft ground drop shadow.
+  - Landside compacted earth slope with gradient hatching.
+  - Waterside slope protected by procedural Class-A boulder riprap / stone pitching with interlocking Voronoi/elliptical stones, mortar seams, and specular highlights.
+  - Bituminous asphalt carriageway with AASHTO yellow dashed centerline and solid white edge lines.
+  - Galvanized steel W-beam safety crash barrier along water-facing shoulder crest.
+- Full HUD elements:
+  - Top-left project banner.
+  - Top-right technical parameters and engineering summary card.
+  - Chainage markers: `START: CH 0+000`, intermediate kilometer ticks (`CH 1+000`, `CH 2+000`), and `END: CH [X+XXX]`.
+  - Numbered engineering callouts with directional leader arrows pointing directly to key hydraulic/geometric features.
+  - Landmark badges for intersected highways and urban centers.
+  - Bottom Google Earth telemetry and concept disclaimer status bar.
+
 ---
 
 ## 3. Standard Copy-Paste Prompt Templates for Future Use
