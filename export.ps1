@@ -17,13 +17,13 @@ Write-Host "Syncing skills and plugins from $GeminiConfigDir into repository..."
 
 if (Test-Path $SkillsSource) {
     $skillsDest = Join-Path $RepoDir "skills"
-    robocopy $SkillsSource $skillsDest /E /XD .git node_modules /XF *.pyc *.log /NP /NDL /NFL /NJH /NJS | Out-Null
+    robocopy $SkillsSource $skillsDest /E /XD .git node_modules /XF *.pyc *.log *auth.json *.env credentials.json /NP /NDL /NFL /NJH /NJS | Out-Null
     Write-Host " -> Synced skills successfully (excluding .git and node_modules)." -ForegroundColor Green
 }
 
 if (Test-Path $PluginsSource) {
     $pluginsDest = Join-Path $RepoDir "plugins"
-    robocopy $PluginsSource $pluginsDest /E /XD .git node_modules /XF *.pyc *.log /NP /NDL /NFL /NJH /NJS | Out-Null
+    robocopy $PluginsSource $pluginsDest /E /XD .git node_modules /XF *.pyc *.log *auth.json *.env credentials.json /NP /NDL /NFL /NJH /NJS | Out-Null
     Write-Host " -> Synced plugins successfully." -ForegroundColor Green
 }
 

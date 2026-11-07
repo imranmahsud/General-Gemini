@@ -3,6 +3,9 @@
 *.tmp
 *.bak
 *.backup
+*auth.json
+*.env
+credentials.json
 __pycache__/
 *.pyc
 .DS_Store
