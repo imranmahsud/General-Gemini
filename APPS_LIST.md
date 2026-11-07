@@ -35,6 +35,8 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 | **Java Development Kit (JDK)** | 21 LTS | Sweet Home 3D plugin SDK, Ghidra runtime | `choco install openjdk21 -y` |
 | **.NET SDK** | 10 / 8.0 | Revit 2027 C# Add-in development | `winget install Microsoft.DotNet.SDK.10` |
 | **Visual Studio Build Tools** | 2026 (18.9) | C++ compilation, native module builds | `choco install visualstudio2026buildtools -y` |
+| **Visual Studio Code** | 1.143+ | Code editing, extension host, terminal | `winget install Microsoft.VisualStudioCode` |
+| **Ollama** | 0.40.15+ | Local offline LLM inference engine (Qwen 3.5 4B) | `winget install Ollama.Ollama` & `ollama pull qwen3.5:4b` |
 
 ---
 
