@@ -40,10 +40,34 @@ Evaluation and operational guide for agent-native tools, video engines, and stea
 - **Category**: Technical Diagram CLI
 - **Why It Matters**: CLI rendering of Mermaid code into clean SVG/PNG assets for reports and documentation.
 
+### 5. Graphify (`graphify-labs/graphify`)
+- **Category**: Codebase AST Knowledge Graph & Local GraphRAG
+- **Engine**: Tree-sitter AST extractors + NetworkX graph analytics.
+- **Why It Matters**: 100% local, zero-token codebase onboarding and architecture analysis. Generates call graphs, detects God nodes and circular dependencies, and builds interactive HTML maps and GraphRAG JSON.
+- **Installed Location**: `~/.gemini/config/skills/graphify`
+- **Execution Command**:
+  ```bash
+  python -m graphify <path-to-repo>
+  ```
+
+### 6. Hypit (`hypit-ai/hypit`)
+- **Category**: Semantic Video Markup Language (SVML) & Video DSL
+- **Engine**: SVML / SVS declarative schema for directing generative video workflows.
+- **Why It Matters**: Provides structured shot lists, actor anchors, camera choreography, and audio-video timing specifications for agent-driven video pipelines.
+- **Installed Location**: `~/.gemini/config/skills/hypit`
+
+### 7. gstack (`garrytan/gstack`)
+- **Category**: Multi-Skill Engineering & Review Toolbelt
+- **Engine**: Curated agent prompt-skills suite by Garry Tan.
+- **Why It Matters**: Includes focused modules for canary verification, deep plan auditing, and HTML design review.
+- **Installed Location**: `skills/gstack`
+
 ---
 
-## Disregarded Tools (Hype / Low Utility)
+## Evaluated & Disregarded / Conditional Tools
 
+- **MoCha (`orange-3dv-team/mocha`)**: Character replacement pipeline for video. Requires ComfyUI, WanVideoWrapper, and a 16GB+ VRAM GPU. Unsuitable for standard CLI agent automation.
+- **Firecrawl**: Web markdown crawler. Requires proprietary paid API key (`FIRECRAWL_API_KEY`). Camofox is installed locally and handles anti-bot bypassing without API costs.
 - **AutoHedge / Vibe-Trading**: High financial loss risk, lack real order-flow execution infrastructure.
 - **Open-LLM-VTuber**: Desktop streaming novelty with no engineering utility.
 - **Open Higgsfield AI**: Thin Electron UI wrapping third-party APIs.
