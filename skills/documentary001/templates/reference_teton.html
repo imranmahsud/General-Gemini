@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg-primary: #080b11;
+        --bg-panel: #0f172a;
+        --border-color: rgba(56, 189, 248, 0.25);
+        --text-white: #f8fafc;
+        --text-dim: #94a3b8;
+        --text-subtle: #64748b;
+        --cyan-telemetry: #38bdf8;
+        --amber-warning: #f59e0b;
+        --red-hazard: #ef4444;
+        --font-mono: 'JetBrains Mono', monospace;
+        --font-sans: 'Inter', sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--bg-primary);
+        font-family: var(--font-sans);
+        color: var(--text-white);
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 25%, #131c2e 0%, #06080d 100%);
+      }
+
+      .hud-grid {
+        position: absolute;
+        inset: 0;
+        background-image: 
+          linear-gradient(to right, rgba(56, 189, 248, 0.035) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(56, 189, 248, 0.035) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .hud-header {
+        position: absolute;
+        top: 32px;
+        left: 80px;
+        right: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        padding-bottom: 12px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        color: var(--cyan-telemetry);
+        z-index: 10;
+      }
+
+      .hud-footer {
+        position: absolute;
+        bottom: 28px;
+        left: 80px;
+        right: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid rgba(148, 163, 184, 0.2);
+        padding-top: 10px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        color: var(--text-subtle);
+        z-index: 10;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        padding: 80px 80px 60px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      /* Photo Display Boxes */
+      .photo-frame {
+        position: relative;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #020617;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      }
+
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .photo-tag {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid var(--border-color);
+        color: var(--cyan-telemetry);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 4px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        backdrop-filter: blur(4px);
+        z-index: 2;
+      }
+
+      /* ACT 1 */
+      .act1-layout {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .act1-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(239, 68, 68, 0.16);
+        border: 1px solid var(--red-hazard);
+        color: var(--red-hazard);
+        padding: 6px 14px;
+        border-radius: 4px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        width: fit-content;
+        margin-bottom: 16px;
+      }
+
+      .act1-title {
+        font-size: 58px;
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin-bottom: 12px;
+      }
+
+      .act1-title span {
+        color: var(--cyan-telemetry);
+      }
+
+      .act1-sub {
+        font-size: 22px;
+        color: var(--text-dim);
+        font-weight: 400;
+        line-height: 1.45;
+        margin-bottom: 30px;
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .metric-box {
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid var(--border-color);
+        border-left: 4px solid var(--cyan-telemetry);
+        padding: 18px 20px;
+        border-radius: 6px;
+      }
+
+      .metric-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-subtle);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+
+      .metric-value {
+        font-size: 26px;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        color: var(--text-white);
+      }
+
+      /* ACT 2 */
+      .act2-layout {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 36px;
+        align-items: center;
+      }
+
+      .findings-column {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .finding-card {
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        border-radius: 6px;
+        padding: 18px 20px;
+      }
+
+      .finding-tag {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--amber-warning);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+
+      .finding-desc {
+        font-size: 16px;
+        color: var(--text-dim);
+        line-height: 1.4;
+      }
+
+      /* ACT 3 */
+      .act3-photos {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 24px;
+        height: 320px;
+      }
+
+      .chrono-timeline {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        margin-top: 10px;
+      }
+
+      .chrono-card {
+        background: rgba(15, 23, 42, 0.92);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 6px;
+        padding: 18px 20px;
+      }
+
+      .chrono-card.critical {
+        border-color: var(--red-hazard);
+        background: rgba(239, 68, 68, 0.12);
+      }
+
+      .chrono-time {
+        font-family: var(--font-mono);
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--red-hazard);
+        margin-bottom: 6px;
+      }
+
+      .chrono-label {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        color: var(--text-white);
+      }
+
+      .chrono-detail {
+        font-size: 14px;
+        color: var(--text-dim);
+        line-height: 1.35;
+      }
+
+      .chrono-banner {
+        margin-top: 20px;
+        background: rgba(239, 68, 68, 0.14);
+        border: 1px solid var(--red-hazard);
+        padding: 14px 24px;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 14px;
+      }
+
+      /* ACT 4 & ACT 5 */
+      .act4-layout {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 36px;
+        align-items: center;
+      }
+
+      .verdict-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .verdict-card {
+        background: rgba(15, 23, 42, 0.92);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 24px 28px;
+      }
+
+      .verdict-header {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--cyan-telemetry);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-bottom: 10px;
+      }
+
+      .verdict-card h3 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--text-white);
+      }
+
+      .verdict-card p {
+        font-size: 16px;
+        color: var(--text-dim);
+        line-height: 1.5;
+      }
+
+      /* Fade Out Blackout */
+      #blackout {
+        position: absolute;
+        inset: 0;
+        background: #000000;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 100;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="68"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div class="hud-grid"></div>
+
+      <!-- Synchronized Master Documentary Soundtrack -->
+      <audio
+        id="soundtrack"
+        src="assets/audio/master_audio.mp3"
+        class="clip"
+        data-start="0"
+        data-duration="68"
+      ></audio>
+
+      <!-- Telemetry Header -->
+      <header class="hud-header">
+        <div>CIVIL HYDRAULICS FORENSIC INVESTIGATION // DOSSIER #1976-TD-01</div>
+        <div>IDAHO, USA // LAT 43°54'33"N LONG 111°32'19"W</div>
+        <div>PANEL: USBR / CHADWICK COMMISSION</div>
+      </header>
+
+      <!-- ACT 1: Case File & Site Overview (0.0s – 13.5s) -->
+      <section
+        id="act1"
+        class="clip scene"
+        data-start="0"
+        data-duration="13.5"
+        data-track-index="1"
+        data-hold
+      >
+        <div id="act1-content" class="act1-layout">
+          <div class="photo-frame" style="height: 580px;">
+            <div class="photo-tag">HISTORICAL RECORD // TETON DAM ABUTMENT SITE</div>
+            <img id="act1-img" src="assets/images/05_aftermath.jpg" alt="Teton Dam Canyon Site" />
+          </div>
+
+          <div>
+            <div class="act1-badge">FORENSIC DISASTER DOSSIER</div>
+            <h1 class="act1-title">TETON DAM <span>FAILURE</span></h1>
+            <p class="act1-sub">
+              June 5, 1976: Initial reservoir filling triggers catastrophic embankment breach.
+            </p>
+
+            <div class="metrics-grid">
+              <div class="metric-box">
+                <div class="metric-label">Max Dam Height</div>
+                <div class="metric-value">305 FT (93 M)</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">Crest Length</div>
+                <div class="metric-value">3,100 FT</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">Reservoir Storage</div>
+                <div class="metric-value">288,000 AC-FT</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">Peak Flood Discharge</div>
+                <div class="metric-value">2,300,000 CFS</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 2: Geotechnical Anatomy & Foundation Defect (13.5s – 27.0s) -->
+      <section
+        id="act2"
+        class="clip scene"
+        data-start="13.5"
+        data-duration="13.5"
+        data-track-index="1"
+        data-hold
+      >
+        <div id="act2-content" class="act2-layout">
+          <div style="background: rgba(15, 23, 42, 0.92); border: 1px solid var(--border-color); border-radius: 8px; padding: 24px; height: 600px; display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-family: var(--font-mono); font-size: 13px; color: var(--cyan-telemetry); margin-bottom: 12px; letter-spacing: 0.08em;">
+              RIGHT ABUTMENT EMBANKMENT CROSS-SECTION (KEY TRENCH CONTACT)
+            </div>
+            <svg viewBox="0 0 900 480" width="100%" height="420" style="overflow: visible;">
+              <defs>
+                <pattern id="rockJoints" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 0 20 L 40 20 M 20 0 L 20 40 M 0 0 L 40 40" stroke="#334155" stroke-width="1" />
+                </pattern>
+                <pattern id="siltDots" width="16" height="16" patternUnits="userSpaceOnUse">
+                  <circle cx="8" cy="8" r="1.5" fill="#f59e0b" opacity="0.4" />
+                </pattern>
+              </defs>
+
+              <path d="M 0 320 Q 250 330 450 370 Q 700 410 900 420 L 900 480 L 0 480 Z" fill="#1e293b" />
+              <path d="M 0 320 Q 250 330 450 370 Q 700 410 900 420 L 900 480 L 0 480 Z" fill="url(#rockJoints)" opacity="0.6" />
+
+              <polygon points="400,360 480,365 460,420 420,420" fill="#0f172a" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4" />
+              <text x="435" y="445" fill="#ef4444" font-family="JetBrains Mono" font-size="12" text-anchor="middle">KEY TRENCH</text>
+
+              <polygon points="120,325 450,110 780,415" fill="#334155" opacity="0.7" />
+
+              <polygon points="340,345 450,110 540,385" fill="#92400e" opacity="0.85" />
+              <polygon points="340,345 450,110 540,385" fill="url(#siltDots)" />
+
+              <polygon points="0,170 380,170 340,345 120,325 0,320" fill="#0284c7" opacity="0.4" />
+              <path d="M 0 170 Q 190 166 380 170" stroke="#38bdf8" stroke-width="3" />
+              <text x="50" y="200" fill="#38bdf8" font-family="JetBrains Mono" font-size="16" font-weight="bold">RESERVOIR HEAD: 270 FT</text>
+
+              <line x1="440" y1="420" x2="440" y2="475" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="3,3" />
+              <text x="440" y="475" fill="#38bdf8" font-family="JetBrains Mono" font-size="11" text-anchor="middle">GROUT LINE</text>
+
+              <path id="seepage-path" d="M 330 320 C 370 350, 410 395, 470 375 S 550 360, 640 400" fill="none" stroke="#ef4444" stroke-width="4" stroke-dasharray="8,6" />
+              
+              <circle id="piping-node" cx="450" cy="380" r="14" fill="#ef4444" opacity="0.3" />
+              <circle cx="450" cy="380" r="6" fill="#ef4444" />
+              <text x="475" y="385" fill="#ef4444" font-family="JetBrains Mono" font-size="14" font-weight="bold">INTERNAL PIPING PATH</text>
+
+              <text x="450" y="95" fill="#f8fafc" font-family="JetBrains Mono" font-size="14" text-anchor="middle" font-weight="bold">CREST EL. 5302 FT</text>
+              <text x="445" y="240" fill="#fef08a" font-family="JetBrains Mono" font-size="14" text-anchor="middle" font-weight="bold">ZONE 1 CORE: UNPLASTIC SILT</text>
+            </svg>
+          </div>
+
+          <div class="findings-column">
+            <div class="photo-frame" style="height: 250px;">
+              <div class="photo-tag">JUNE 5, 1976 // INITIAL SEEPAGE AT RIGHT ABUTMENT</div>
+              <img src="assets/images/01_initial_leak.jpg" alt="Initial leak at right abutment" />
+            </div>
+
+            <div class="finding-card">
+              <div class="finding-tag">Critical Vulnerability 01</div>
+              <div class="finding-desc">
+                Extensive open joint fissures in rhyolite foundation allowed pressurized seepage.
+              </div>
+            </div>
+
+            <div class="finding-card">
+              <div class="finding-tag">Critical Vulnerability 02</div>
+              <div class="finding-desc">
+                Unplastic loess silt core detached rapidly under hydraulic gradient.
+              </div>
+            </div>
+
+            <div class="finding-card">
+              <div class="finding-tag">Critical Vulnerability 03</div>
+              <div class="finding-desc">
+                No granular filter zone was provided to arrest migrating silt particles.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 3: Breach Progression & Chronology (27.0s – 40.5s) -->
+      <section
+        id="act3"
+        class="clip scene"
+        data-start="27"
+        data-duration="13.5"
+        data-track-index="1"
+        data-hold
+      >
+        <div id="act3-content">
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--red-hazard); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">
+            CRITICAL INCIDENT TIMELINE // MORNING OF JUNE 5, 1976
+          </div>
+          <h2 style="font-size: 40px; font-weight: 800; margin-bottom: 20px;">CHRONOLOGY OF EMBANKMENT COLLAPSE</h2>
+
+          <div class="act3-photos">
+            <div class="photo-frame">
+              <div class="photo-tag">10:30 AM // BULLDOZERS ATTEMPTING TO PLUG PIPING VOID</div>
+              <img src="assets/images/02_developing_breach.jpg" alt="Bulldozers attempt to plug leak" />
+            </div>
+            <div class="photo-frame">
+              <div class="photo-tag">11:57 AM // EMBANKMENT CREST COLLAPSE INTO VORTEX</div>
+              <img src="assets/images/03_crest_collapse.jpg" alt="Crest collapse" />
+            </div>
+          </div>
+
+          <div class="chrono-timeline">
+            <div id="card-1" class="chrono-card">
+              <div class="chrono-time">07:00 AM</div>
+              <div class="chrono-label">First Turbid Springs</div>
+              <div class="chrono-detail">Muddy seepage discharges downstream of toe.</div>
+            </div>
+
+            <div id="card-2" class="chrono-card">
+              <div class="chrono-time">10:30 AM</div>
+              <div class="chrono-label">Piping Void Emerges</div>
+              <div class="chrono-detail">A wet spot erupts into a 40 cfs piping spring.</div>
+            </div>
+
+            <div id="card-3" class="chrono-card">
+              <div class="chrono-time">11:30 AM</div>
+              <div class="chrono-label">Reservoir Whirlpool</div>
+              <div class="chrono-detail">Large vortex funnels reservoir into breached core.</div>
+            </div>
+
+            <div id="card-4" class="chrono-card critical">
+              <div class="chrono-time">11:57 AM</div>
+              <div class="chrono-label">Crest Breach</div>
+              <div class="chrono-detail">Embankment collapses. 2.3M cfs flood released.</div>
+            </div>
+          </div>
+
+          <div id="chrono-banner" class="chrono-banner">
+            <div>TOTAL COLLAPSE DURATION: <span style="color: #ffffff; font-weight: bold;">4 HOURS 57 MINUTES</span></div>
+            <div>FAILURE MODE: <span style="color: var(--red-hazard); font-weight: bold;">INTERNAL HYDRAULIC PIPING</span></div>
+            <div>PEAK DISCHARGE: <span style="color: #ffffff; font-weight: bold;">2,300,000 CFS</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 4: Inundation & Chadwick Commission (40.5s – 54.0s) -->
+      <section
+        id="act4"
+        class="clip scene"
+        data-start="40.5"
+        data-duration="13.5"
+        data-track-index="1"
+        data-hold
+      >
+        <div id="act4-content" class="act4-layout">
+          <div class="photo-frame" style="height: 580px;">
+            <div class="photo-tag">JUNE 5, 1976 // CATASTROPHIC FLOOD WAVE RELEASE</div>
+            <img src="assets/images/04_full_breach.jpg" alt="Catastrophic flood release" />
+          </div>
+
+          <div class="verdict-column">
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 13px; color: var(--cyan-telemetry); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">
+                INDEPENDENT PANEL FINDINGS (CHADWICK & SEED COMMISSION)
+              </div>
+              <h2 style="font-size: 40px; font-weight: 800; margin-bottom: 16px;">FORENSIC VERDICT & DAM SAFETY REFORM</h2>
+            </div>
+
+            <div class="verdict-card">
+              <div class="verdict-header">PRIMARY CAUSE OF FAILURE</div>
+              <h3>Internal Piping Across Rock Joints</h3>
+              <p>
+                Core silt piped into unsealed rock joints under high head; single-row grout curtain failed.
+              </p>
+            </div>
+
+            <div class="verdict-card">
+              <div class="verdict-header">MODERN ENGINEERING MANDATE</div>
+              <h3>Mandatory Defensive Filter Design</h3>
+              <p>
+                Prompted strict filter criteria worldwide. Cores are never placed against open rock without downstream chimney filters.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 5: Forensic Outro & Engineering Legacy (54.0s – 68.0s) -->
+      <section
+        id="act5"
+        class="clip scene"
+        data-start="54"
+        data-duration="14"
+        data-track-index="1"
+        data-hold
+      >
+        <div id="act5-content" class="act4-layout">
+          <div class="photo-frame" style="height: 580px;">
+            <div class="photo-tag">PERMANENT MONUMENT // SEVERED CANYON EMBANKMENT</div>
+            <img id="act5-img" src="assets/images/05_aftermath.jpg" alt="Teton Dam Canyon Today" />
+          </div>
+
+          <div class="verdict-column">
+            <div>
+              <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.15); border: 1px solid var(--cyan-telemetry); color: var(--cyan-telemetry); padding: 5px 12px; border-radius: 4px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 12px;">
+                INVESTIGATION CONCLUDED // DOSSIER SEALED
+              </div>
+              <h2 style="font-size: 40px; font-weight: 900; line-height: 1.15; margin-bottom: 16px;">
+                THE ENDURING LEGACY OF TETON DAM
+              </h2>
+            </div>
+
+            <div class="metrics-grid">
+              <div class="metric-box">
+                <div class="metric-label">Human Toll</div>
+                <div class="metric-value" style="color: var(--red-hazard);">11 FATALITIES</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">Economic Loss</div>
+                <div class="metric-value">$2.0B USD</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">Design Standard</div>
+                <div class="metric-value" style="font-size: 21px; color: var(--amber-warning);">DEFENSIVE FILTERS</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">Federal Oversight</div>
+                <div class="metric-value" style="font-size: 21px; color: var(--cyan-telemetry);">DAM SAFETY ACT</div>
+              </div>
+            </div>
+
+            <div class="verdict-card" style="border-left: 4px solid var(--cyan-telemetry); padding: 20px 24px;">
+              <p style="font-size: 17px; color: var(--text-white); font-weight: 500; line-height: 1.5;">
+                A permanent lesson for civil and geotechnical engineers: foundation geology and defensive filtration dictate embankment survival.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cinematic Fade Out to Black Overlay -->
+      <div id="blackout"></div>
+
+      <!-- Telemetry Footer -->
+      <footer class="hud-footer">
+        <div>CHADWICK COMMISSION REPORT (US DOI 1976) // CASE STUDY FOR CIVIL ENGINEERS</div>
+        <div>AUDIO: NEURAL NARRATION + SFX MASTER // 30 FPS</div>
+        <div>STATUS: COMPLETE</div>
+      </footer>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // ACT 1 Animations (0.0s – 13.5s)
+      tl.fromTo("#act1-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 
+        0.3
+      );
+      tl.fromTo("#act1-img",
+        { scale: 1.05 },
+        { scale: 1.0, duration: 12.5, ease: "none" },
+        0.5
+      );
+      tl.fromTo(".metric-box", 
+        { opacity: 0, scale: 0.95 }, 
+        { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: "power2.out" }, 
+        1.0
+      );
+      tl.to("#act1-content", 
+        { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 
+        12.9
+      );
+
+      // ACT 2 Animations (13.5s – 27.0s)
+      tl.fromTo("#act2-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 
+        13.7
+      );
+      tl.fromTo(".finding-card", 
+        { opacity: 0, x: 25 }, 
+        { opacity: 1, x: 0, duration: 0.4, stagger: 0.15, ease: "power2.out" }, 
+        14.4
+      );
+      tl.fromTo("#seepage-path", 
+        { strokeDashoffset: 100, opacity: 0.3 }, 
+        { strokeDashoffset: 0, opacity: 1, duration: 2.2, ease: "none" }, 
+        15.0
+      );
+      tl.fromTo("#piping-node",
+        { scale: 1, transformOrigin: "center" },
+        { scale: 1.6, duration: 0.6, repeat: 3, yoyo: true, ease: "power1.inOut" },
+        17.5
+      );
+      tl.to("#act2-content", 
+        { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 
+        26.4
+      );
+
+      // ACT 3 Animations (27.0s – 40.5s)
+      tl.fromTo("#act3-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 
+        27.2
+      );
+      tl.fromTo("#card-1", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 27.8);
+      tl.fromTo("#card-2", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 29.2);
+      tl.fromTo("#card-3", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 30.6);
+      tl.fromTo("#card-4", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 32.0);
+      tl.fromTo("#chrono-banner", { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, 33.5);
+      tl.to("#act3-content", 
+        { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 
+        39.9
+      );
+
+      // ACT 4 Animations (40.5s – 54.0s)
+      tl.fromTo("#act4-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 
+        40.7
+      );
+      tl.fromTo(".verdict-card", 
+        { opacity: 0, scale: 0.96 }, 
+        { opacity: 1, scale: 1, duration: 0.5, stagger: 0.2, ease: "power2.out" }, 
+        41.5
+      );
+      tl.to("#act4-content", 
+        { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 
+        53.4
+      );
+
+      // ACT 5 Animations: Forensic Outro (54.0s – 68.0s)
+      tl.fromTo("#act5-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 
+        54.2
+      );
+      tl.fromTo("#act5-img",
+        { scale: 1.05 },
+        { scale: 1.0, duration: 11.5, ease: "none" },
+        54.5
+      );
+      tl.fromTo("#act5-content .metric-box", 
+        { opacity: 0, scale: 0.95 }, 
+        { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: "power2.out" }, 
+        55.2
+      );
+
+      // Cinematic Final Fade Out to Black
+      tl.fromTo("#blackout",
+        { opacity: 0 },
+        { opacity: 1, duration: 1.6, ease: "power2.inOut" },
+        66.4
+      );
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

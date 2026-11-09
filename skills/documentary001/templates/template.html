@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>{{TITLE}} // Forensic Engineering Documentary</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg-primary: #080b11;
+        --bg-panel: #0f172a;
+        --border-color: rgba(56, 189, 248, 0.25);
+        --text-white: #f8fafc;
+        --text-dim: #94a3b8;
+        --text-subtle: #64748b;
+        --cyan-telemetry: #38bdf8;
+        --amber-warning: #f59e0b;
+        --red-hazard: #ef4444;
+        --font-mono: 'JetBrains Mono', monospace;
+        --font-sans: 'Inter', sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--bg-primary);
+        font-family: var(--font-sans);
+        color: var(--text-white);
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 25%, #131c2e 0%, #06080d 100%);
+      }
+
+      .hud-grid {
+        position: absolute;
+        inset: 0;
+        background-image: 
+          linear-gradient(to right, rgba(56, 189, 248, 0.035) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(56, 189, 248, 0.035) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .hud-header {
+        position: absolute;
+        top: 32px;
+        left: 80px;
+        right: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        padding-bottom: 12px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        color: var(--cyan-telemetry);
+        z-index: 10;
+      }
+
+      .hud-footer {
+        position: absolute;
+        bottom: 28px;
+        left: 80px;
+        right: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid rgba(148, 163, 184, 0.2);
+        padding-top: 10px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        color: var(--text-subtle);
+        z-index: 10;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        padding: 80px 80px 60px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      /* Photo Display Frame */
+      .photo-frame {
+        position: relative;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #020617;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      }
+
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .photo-tag {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid var(--border-color);
+        color: var(--cyan-telemetry);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 4px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        backdrop-filter: blur(4px);
+        z-index: 2;
+      }
+
+      /* ACT 1 */
+      .act1-layout {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .act-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 4px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        width: fit-content;
+        margin-bottom: 16px;
+      }
+
+      .badge-hazard {
+        background: rgba(239, 68, 68, 0.16);
+        border: 1px solid var(--red-hazard);
+        color: var(--red-hazard);
+      }
+
+      .badge-warning {
+        background: rgba(245, 158, 11, 0.16);
+        border: 1px solid var(--amber-warning);
+        color: var(--amber-warning);
+      }
+
+      .badge-telemetry {
+        background: rgba(56, 189, 248, 0.16);
+        border: 1px solid var(--cyan-telemetry);
+        color: var(--cyan-telemetry);
+      }
+
+      .act1-title {
+        font-size: 56px;
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin-bottom: 12px;
+      }
+
+      .act1-title span {
+        color: var(--cyan-telemetry);
+      }
+
+      .act1-sub {
+        font-size: 22px;
+        color: var(--text-dim);
+        font-weight: 400;
+        line-height: 1.45;
+        margin-bottom: 30px;
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .metric-box {
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid var(--border-color);
+        border-left: 4px solid var(--cyan-telemetry);
+        padding: 18px 20px;
+        border-radius: 6px;
+      }
+
+      .metric-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-subtle);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+
+      .metric-value {
+        font-size: 26px;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        color: var(--text-white);
+      }
+
+      /* ACT 2 */
+      .act2-layout {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 36px;
+        align-items: center;
+      }
+
+      .diagram-container {
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .findings-column {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .finding-card {
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-left: 4px solid var(--amber-warning);
+        padding: 14px 18px;
+        border-radius: 6px;
+      }
+
+      .finding-tag {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--amber-warning);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .finding-desc {
+        font-size: 14px;
+        color: var(--text-white);
+        line-height: 1.4;
+      }
+
+      /* ACT 3 */
+      .act3-photos {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        height: 400px;
+        margin-bottom: 24px;
+      }
+
+      .chrono-timeline {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .chrono-card {
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-top: 3px solid var(--cyan-telemetry);
+        padding: 14px 16px;
+        border-radius: 6px;
+      }
+
+      .chrono-time {
+        font-family: var(--font-mono);
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--cyan-telemetry);
+        margin-bottom: 4px;
+      }
+
+      .chrono-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-white);
+        margin-bottom: 4px;
+      }
+
+      .chrono-detail {
+        font-size: 12px;
+        color: var(--text-dim);
+        line-height: 1.35;
+      }
+
+      .chrono-banner {
+        margin-top: 16px;
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid var(--red-hazard);
+        border-radius: 6px;
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 14px;
+      }
+
+      /* ACT 4 */
+      .act4-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .verdict-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .verdict-card {
+        background: rgba(15, 23, 42, 0.95);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-left: 4px solid var(--red-hazard);
+        padding: 16px 20px;
+        border-radius: 6px;
+      }
+
+      .verdict-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+
+      .verdict-category {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--red-hazard);
+      }
+
+      .verdict-status {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-subtle);
+      }
+
+      .verdict-body {
+        font-size: 14px;
+        color: var(--text-dim);
+        line-height: 1.45;
+      }
+
+      /* ACT 5: OUTRO */
+      .act5-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      /* Fade Out Blackout Overlay */
+      #blackout {
+        position: absolute;
+        inset: 0;
+        background: #000000;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 100;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- Master Audio Track (Deterministic Seeking) -->
+      <audio
+        id="master-audio"
+        src="assets/audio/master_audio.mp3"
+        preload="auto"
+        class="clip"
+        data-start="0"
+        data-duration="68"
+        data-track-index="0"
+      ></audio>
+
+      <!-- Background HUD Grid -->
+      <div class="hud-grid"></div>
+
+      <!-- Telemetry Header -->
+      <header class="hud-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="display: inline-block; width: 8px; height: 8px; background: var(--cyan-telemetry); border-radius: 50%;"></span>
+          <span>DOSSIER // {{DOSSIER_CODE}}</span>
+        </div>
+        <div>CLASSIFICATION: {{CLASSIFICATION}}</div>
+        <div>TIMECODE: <span style="color: var(--text-white);">{{TIMECODE_LABEL}}</span></div>
+      </header>
+
+      <!-- ACT 1: Incident Dossier & Scale (0.0s – 13.5s) -->
+      <section
+        id="act1"
+        class="clip scene"
+        data-start="0"
+        data-duration="13.5"
+        data-track-index="1"
+        data-hold
+      >
+        <div id="act1-content" class="act1-layout">
+          <div>
+            <div class="act-badge badge-hazard">
+              <span>●</span> {{INCIDENT_BADGE}}
+            </div>
+            <h1 class="act1-title">
+              {{TITLE_MAIN}} <br />
+              <span>{{TITLE_HIGHLIGHT}}</span>
+            </h1>
+            <p class="act1-sub">
+              {{INCIDENT_SUMMARY}}
+            </p>
+
+            <div class="metrics-grid">
+              <div class="metric-box">
+                <div class="metric-label">{{METRIC_1_LABEL}}</div>
+                <div class="metric-value">{{METRIC_1_VAL}}</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">{{METRIC_2_LABEL}}</div>
+                <div class="metric-value">{{METRIC_2_VAL}}</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">{{METRIC_3_LABEL}}</div>
+                <div class="metric-value">{{METRIC_3_VAL}}</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">{{METRIC_4_LABEL}}</div>
+                <div class="metric-value">{{METRIC_4_VAL}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-frame" style="height: 600px;">
+            <div class="photo-tag">{{PHOTO_1_TAG}}</div>
+            <img id="act1-img" src="assets/images/01_hero.jpg" alt="Incident Hero View" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 2: Anatomical Mechanism & Vulnerabilities (13.5s – 27.0s) -->
+      <section
+        id="act2"
+        class="clip scene"
+        data-start="13.5"
+        data-duration="13.5"
+        data-track-index="1"
+        data-hold
+      >
+        <div id="act2-content" class="act2-layout">
+          <div class="diagram-container">
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--cyan-telemetry); margin-bottom: 12px; letter-spacing: 0.1em;">
+              ENGINEERING SCHEMATIC // {{SCHEMATIC_TITLE}}
+            </div>
+            <!-- Dynamic 2D SVG Section Diagram -->
+            <svg viewBox="0 0 900 500" style="width: 100%; height: auto; display: block;">
+              <rect width="900" height="500" fill="#0b1322" rx="6" />
+              <!-- Diagram geometry customized per incident -->
+              <path id="failure-vector" d="M 330 320 C 370 350, 410 395, 470 375 S 550 360, 640 400" fill="none" stroke="#ef4444" stroke-width="4" stroke-dasharray="8,6" />
+              <circle id="failure-node" cx="450" cy="380" r="14" fill="#ef4444" opacity="0.3" />
+              <circle cx="450" cy="380" r="6" fill="#ef4444" />
+              <text x="475" y="385" fill="#ef4444" font-family="JetBrains Mono" font-size="14" font-weight="bold">{{FAILURE_VECTOR_LABEL}}</text>
+            </svg>
+          </div>
+
+          <div class="findings-column">
+            <div class="photo-frame" style="height: 250px;">
+              <div class="photo-tag">{{PHOTO_2_TAG}}</div>
+              <img src="assets/images/02_mechanism.jpg" alt="Early mechanism photo" />
+            </div>
+
+            <div class="finding-card">
+              <div class="finding-tag">Vulnerability 01</div>
+              <div class="finding-desc">{{VULN_1_DESC}}</div>
+            </div>
+            <div class="finding-card">
+              <div class="finding-tag">Vulnerability 02</div>
+              <div class="finding-desc">{{VULN_2_DESC}}</div>
+            </div>
+            <div class="finding-card">
+              <div class="finding-tag">Vulnerability 03</div>
+              <div class="finding-desc">{{VULN_3_DESC}}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 3: Chronology of Catastrophe (27.0s – 40.5s) -->
+      <section
+        id="act3"
+        class="clip scene"
+        data-start="27"
+        data-duration="13.5"
+        data-track-index="1"
+        data-hold
+      >
+        <div id="act3-content">
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--red-hazard); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;">
+            CRITICAL INCIDENT TIMELINE // {{TIMELINE_DATE}}
+          </div>
+          <h2 style="font-size: 40px; font-weight: 800; margin-bottom: 20px;">{{TIMELINE_TITLE}}</h2>
+
+          <div class="act3-photos">
+            <div class="photo-frame">
+              <div class="photo-tag">{{PHOTO_3A_TAG}}</div>
+              <img src="assets/images/03_progression_a.jpg" alt="Timeline phase 1" />
+            </div>
+            <div class="photo-frame">
+              <div class="photo-tag">{{PHOTO_3B_TAG}}</div>
+              <img src="assets/images/03_progression_b.jpg" alt="Timeline phase 2" />
+            </div>
+          </div>
+
+          <div class="chrono-timeline">
+            <div id="card-1" class="chrono-card">
+              <div class="chrono-time">{{T1_TIME}}</div>
+              <div class="chrono-label">{{T1_LABEL}}</div>
+              <div class="chrono-detail">{{T1_DETAIL}}</div>
+            </div>
+            <div id="card-2" class="chrono-card">
+              <div class="chrono-time">{{T2_TIME}}</div>
+              <div class="chrono-label">{{T2_LABEL}}</div>
+              <div class="chrono-detail">{{T2_DETAIL}}</div>
+            </div>
+            <div id="card-3" class="chrono-card">
+              <div class="chrono-time">{{T3_TIME}}</div>
+              <div class="chrono-label">{{T3_LABEL}}</div>
+              <div class="chrono-detail">{{T3_DETAIL}}</div>
+            </div>
+            <div id="card-4" class="chrono-card">
+              <div class="chrono-time">{{T4_TIME}}</div>
+              <div class="chrono-label">{{T4_LABEL}}</div>
+              <div class="chrono-detail">{{T4_DETAIL}}</div>
+            </div>
+          </div>
+
+          <div id="chrono-banner" class="chrono-banner">
+            <span style="color: var(--red-hazard); font-weight: 700;">▲ {{BANNER_ALERT_LABEL}}</span>
+            <span style="color: var(--text-white);">{{BANNER_ALERT_VAL}}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 4: Forensic Root Cause Verdict (40.5s – 54.0s) -->
+      <section
+        id="act4"
+        class="clip scene"
+        data-start="40.5"
+        data-duration="13.5"
+        data-track-index="1"
+        data-hold
+      >
+        <div id="act4-content" class="act4-layout">
+          <div>
+            <div class="act-badge badge-hazard">
+              <span>✕</span> OFFICIAL FORENSIC VERDICT
+            </div>
+            <h2 style="font-size: 42px; font-weight: 800; margin-bottom: 12px;">{{INVESTIGATION_PANEL}}</h2>
+            <p style="font-size: 18px; color: var(--text-dim); line-height: 1.45; margin-bottom: 24px;">
+              {{INVESTIGATION_FINDING_SUMMARY}}
+            </p>
+
+            <div class="verdict-list">
+              <div class="verdict-card">
+                <div class="verdict-header">
+                  <span class="verdict-category">{{FAULT_1_CAT}}</span>
+                  <span class="verdict-status">{{FAULT_1_STATUS}}</span>
+                </div>
+                <div class="verdict-body">{{FAULT_1_DESC}}</div>
+              </div>
+              <div class="verdict-card">
+                <div class="verdict-header">
+                  <span class="verdict-category">{{FAULT_2_CAT}}</span>
+                  <span class="verdict-status">{{FAULT_2_STATUS}}</span>
+                </div>
+                <div class="verdict-body">{{FAULT_2_DESC}}</div>
+              </div>
+              <div class="verdict-card">
+                <div class="verdict-header">
+                  <span class="verdict-category">{{FAULT_3_CAT}}</span>
+                  <span class="verdict-status">{{FAULT_3_STATUS}}</span>
+                </div>
+                <div class="verdict-body">{{FAULT_3_DESC}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-frame" style="height: 600px;">
+            <div class="photo-tag">{{PHOTO_4_TAG}}</div>
+            <img id="act4-img" src="assets/images/04_full_catastrophe.jpg" alt="Catastrophic breach view" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ACT 5: Investigation Concluded & Engineering Legacy (54.0s – 68.0s) -->
+      <section
+        id="act5"
+        class="clip scene"
+        data-start="54"
+        data-duration="14"
+        data-track-index="1"
+        data-hold
+      >
+        <div id="act5-content" class="act5-layout">
+          <div class="photo-frame" style="height: 580px;">
+            <div class="photo-tag">{{PHOTO_5_TAG}}</div>
+            <img id="act5-img" src="assets/images/05_aftermath.jpg" alt="Post-incident aftermath" />
+          </div>
+
+          <div>
+            <div class="act-badge badge-telemetry">
+              <span>■</span> INVESTIGATION CONCLUDED // DOSSIER SEALED
+            </div>
+            <h2 style="font-size: 44px; font-weight: 800; line-height: 1.15; margin-bottom: 14px;">
+              {{LEGACY_TITLE}}
+            </h2>
+            <p style="font-size: 18px; color: var(--text-dim); line-height: 1.5; margin-bottom: 24px;">
+              {{LEGACY_SUMMARY}}
+            </p>
+
+            <div class="metrics-grid" style="margin-bottom: 24px;">
+              <div class="metric-box">
+                <div class="metric-label">{{LEGACY_METRIC_1_LABEL}}</div>
+                <div class="metric-value" style="font-size: 24px; color: var(--red-hazard);">{{LEGACY_METRIC_1_VAL}}</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">{{LEGACY_METRIC_2_LABEL}}</div>
+                <div class="metric-value" style="font-size: 24px; color: var(--text-white);">{{LEGACY_METRIC_2_VAL}}</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">{{LEGACY_METRIC_3_LABEL}}</div>
+                <div class="metric-value" style="font-size: 21px; color: var(--amber-warning);">{{LEGACY_METRIC_3_VAL}}</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-label">{{LEGACY_METRIC_4_LABEL}}</div>
+                <div class="metric-value" style="font-size: 21px; color: var(--cyan-telemetry);">{{LEGACY_METRIC_4_VAL}}</div>
+              </div>
+            </div>
+
+            <div class="verdict-card" style="border-left: 4px solid var(--cyan-telemetry); padding: 20px 24px;">
+              <p style="font-size: 17px; color: var(--text-white); font-weight: 500; line-height: 1.5;">
+                {{CLOSING_PRINCIPLE}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cinematic Fade Out to Black Overlay -->
+      <div id="blackout"></div>
+
+      <!-- Telemetry Footer -->
+      <footer class="hud-footer">
+        <div>{{REPORT_SOURCE}} // CASE STUDY FOR ENGINEERS</div>
+        <div>AUDIO: NEURAL NARRATION + SFX MASTER // 30 FPS</div>
+        <div>STATUS: COMPLETE</div>
+      </footer>
+    </div>
+
+    <!-- GSAP Master Animation Choreography -->
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // ACT 1 Animations (0.0s – 13.5s)
+      tl.fromTo("#act1-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 
+        0.3
+      );
+      tl.fromTo("#act1-img",
+        { scale: 1.05 },
+        { scale: 1.0, duration: 12.5, ease: "none" },
+        0.5
+      );
+      tl.fromTo(".metric-box", 
+        { opacity: 0, scale: 0.95 }, 
+        { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: "power2.out" }, 
+        1.0
+      );
+      tl.to("#act1-content", 
+        { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 
+        12.9
+      );
+
+      // ACT 2 Animations (13.5s – 27.0s)
+      tl.fromTo("#act2-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 
+        13.7
+      );
+      tl.fromTo(".finding-card", 
+        { opacity: 0, x: 25 }, 
+        { opacity: 1, x: 0, duration: 0.4, stagger: 0.15, ease: "power2.out" }, 
+        14.4
+      );
+      tl.fromTo("#failure-vector", 
+        { strokeDashoffset: 100, opacity: 0.3 }, 
+        { strokeDashoffset: 0, opacity: 1, duration: 2.2, ease: "none" }, 
+        15.0
+      );
+      tl.fromTo("#failure-node",
+        { scale: 1, transformOrigin: "center" },
+        { scale: 1.6, duration: 0.6, repeat: 3, yoyo: true, ease: "power1.inOut" },
+        17.5
+      );
+      tl.to("#act2-content", 
+        { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 
+        26.4
+      );
+
+      // ACT 3 Animations (27.0s – 40.5s)
+      tl.fromTo("#act3-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 
+        27.2
+      );
+      tl.fromTo("#card-1", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 27.8);
+      tl.fromTo("#card-2", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 29.2);
+      tl.fromTo("#card-3", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 30.6);
+      tl.fromTo("#card-4", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 32.0);
+      tl.fromTo("#chrono-banner", { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, 33.5);
+      tl.to("#act3-content", 
+        { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 
+        39.9
+      );
+
+      // ACT 4 Animations (40.5s – 54.0s)
+      tl.fromTo("#act4-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 
+        40.7
+      );
+      tl.fromTo("#act4-img",
+        { scale: 1.05 },
+        { scale: 1.0, duration: 12.5, ease: "none" },
+        41.0
+      );
+      tl.fromTo(".verdict-card", 
+        { opacity: 0, x: -20 }, 
+        { opacity: 1, x: 0, duration: 0.4, stagger: 0.15, ease: "power2.out" }, 
+        41.5
+      );
+      tl.to("#act4-content", 
+        { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 
+        53.4
+      );
+
+      // ACT 5: OUTRO & Cinematic Fade (54.0s – 68.0s)
+      tl.fromTo("#act5-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 
+        54.2
+      );
+      tl.fromTo("#act5-img",
+        { scale: 1.05 },
+        { scale: 1.0, duration: 13.0, ease: "none" },
+        54.5
+      );
+      tl.fromTo("#act5-content .metric-box", 
+        { opacity: 0, scale: 0.95 }, 
+        { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: "power2.out" }, 
+        55.0
+      );
+      tl.fromTo("#act5-content .verdict-card",
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+        56.0
+      );
+
+      // Cinematic Fade to Black (1.6s before 68.0s)
+      tl.to("#blackout", {
+        opacity: 1,
+        duration: 1.6,
+        ease: "power2.inOut"
+      }, 66.4);
+
+      // Export duration to window for headless render synchronization
+      window.__duration = 68.0;
+    </script>
+  </body>
+</html>
