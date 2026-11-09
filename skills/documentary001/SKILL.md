@@ -1,6 +1,6 @@
 ---
 name: documentary001
-description: Forensic engineering and technical documentary video style using HyperFrames, neural TTS voiceover synchronization, procedural SFX sound design, archival photo integration, telemetry cards, and cinematic outro (code word: documentary001). Use whenever the user mentions 'documentary001' or requests an incident forensic documentary in this exact style.
+description: Mandatory default documentary and video presentation style using HyperFrames, neural TTS voiceover synchronization, procedural SFX sound design, archival photo integration, telemetry cards, and cinematic outro. Use by default whenever the user asks to create a documentary or video, or explicitly references 'documentary001'.
 ---
 
 # Documentary 001: Forensic Engineering Video Style
