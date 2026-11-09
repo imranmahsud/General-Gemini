@@ -58,6 +58,7 @@ This script automatically:
 | **Frontend Slides** | Code-driven interactive presentations | Web presentations, Chart.js, HTML slides |
 | **Stop Slop** | Writing discipline & concise technical prose | Cuts throat-clearing, active voice, authentic communication |
 | **Documentary 001** | Forensic engineering video style (documentary001) | 5-act incident dossier, HUD telemetry, neural voiceover, SFX suite, archival photo integration, bitexact metadata hygiene |
+| **Documentary 002** | Forensic engineering video style (documentary002) | Locked voiceover model & audio architecture from documentary001, 5-act dossier, HUD telemetry, bitexact metadata hygiene |
 
 ---
 
@@ -139,7 +140,7 @@ Integrated with `reverse-engineer-anything`, `rea-analysis-optimization`, and `r
 ## 📦 What's Included in this Transfer
 
 ### 1. Custom Agent Skills
-* **Forensic Documentary & Video (documentary001)**: documentary001 (code word: documentary001 - 5-act forensic engineering disaster investigation video style with HyperFrames, neural TTS, 5-piece SFX sound design, archival photo integration, and bitexact metadata hygiene)
+* **Forensic Documentary & Video (documentary001 / documentary002)**: documentary001 and documentary002 (code words: documentary001, documentary002 - 5-act forensic engineering disaster investigation video style with HyperFrames, locked neural TTS voiceover from documentary001, 5-piece SFX sound design, archival photo integration, and bitexact metadata hygiene)
 * **Anti-Slop Design & Writing**: `diagram-design`, `impeccable`, `taste-skill`, `ui-ux-pro-max`, `humanizer`, `stop-slop`, `frontend-slides`, `understand-anything` (suite)
 * **Reverse Engineering & Security**: `reverse-engineer-anything`, `rea-analysis-optimization`, `rea-tool-design`
 * **CAD, BIM & Spatial**: `cad-bim-drawing-mastery`, `architectural-plan-designer`, `furniture-fit`, `pascal-3d`, `ai-image-generation`
