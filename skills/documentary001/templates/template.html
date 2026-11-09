@@ -393,7 +393,7 @@
     </style>
   </head>
   <body>
-    <div id="root">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="68" data-width="1920" data-height="1080">
       <!-- Master Audio Track (Deterministic Seeking) -->
       <audio
         id="master-audio"
@@ -805,6 +805,9 @@
 
       // Export duration to window for headless render synchronization
       window.__duration = 68.0;
+      window.__timelines = window.__timelines || {};
+      window.__timelines['main'] = tl;
+      tl.seek(0);
     </script>
   </body>
 </html>
