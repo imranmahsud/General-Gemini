@@ -86,11 +86,11 @@ ffmpeg -y \
   -i assets/audio/riser.mp3 \
   -i assets/audio/chime.mp3 \
   -filter_complex "\
-    [0:a]adelay=300|300,volume=1.0[n1];\
-    [1:a]adelay=14000|14000,volume=1.0[n2];\
-    [2:a]adelay=27500|27500,volume=1.0[n3];\
-    [3:a]adelay=41000|41000,volume=1.0[n4];\
-    [4:a]adelay=54500|54500,volume=1.0[n5];\
+    [0:a]adelay=600|600,volume=1.0[n1];\
+    [1:a]adelay=13800|13800,volume=1.0[n2];\
+    [2:a]adelay=27200|27200,volume=1.0[n3];\
+    [3:a]adelay=39800|39800,volume=1.0[n4];\
+    [4:a]adelay=52400|52400,volume=1.0[n5];\
     [5:a]adelay=13200|13200,volume=0.35[w1];\
     [6:a]adelay=1000|1000,volume=0.30[c1];\
     [7:a]adelay=17500|17500,volume=0.45[b1];\

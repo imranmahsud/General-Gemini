@@ -50,13 +50,13 @@ def main():
 import sys
 from pathlib import Path
 
-# Voiceover scripts for the 5 Acts
+# Voiceover scripts for the 5 Acts (calibrated for natural speech and tight pacing)
 ACTS = {
-    "act1": "Executive dossier summary outlining the event, date, and magnitude.",
-    "act2": "Engineering anatomy and structural vulnerabilities that initiated the failure.",
-    "act3": "Chronology of the morning of the collapse, tracking early warnings to total failure.",
-    "act4": "Official forensic commission verdict, determining primary design and operational errors.",
-    "act5": "Investigation conclusion and permanent technical legacy for engineering standards."
+    "act1": "On June 5th, 1976, the newly completed Teton Dam suffered a catastrophic internal breach during its initial reservoir filling, releasing two million cubic feet per second across the valley.",
+    "act2": "Forensic analysis revealed pressurized reservoir seepage through unsealed volcanic rock fissures in the right abutment, rapidly eroding the unplastic silt core because designers omitted defensive downstream filter zones.",
+    "act3": "At seven in the morning, muddy springs erupted at the downstream toe, and within hours, high-velocity piping swallowed two D9 bulldozers as the central crest collapsed into a raging vortex.",
+    "act4": "The independent Chadwick panel concluded the failure was completely preventable, caused by flawed design assumptions, inadequate foundation exploration, and the total omission of granular transition filters.",
+    "act5": "The disaster claimed eleven lives and caused two billion dollars in damage, fundamentally reforming geotechnical engineering and mandating modern defensive filter criteria to protect lives worldwide."
 }
 
 def generate_voiceover(voice="en-US-ChristopherNeural"):
@@ -64,18 +64,31 @@ def generate_voiceover(voice="en-US-ChristopherNeural"):
     audio_dir.mkdir(parents=True, exist_ok=True)
     
     for act, script in ACTS.items():
+        raw_file = audio_dir / f"{act}_raw.mp3"
         out_file = audio_dir / f"{act}.mp3"
         print(f"Generating voiceover: {out_file.name}...")
-        cmd = [
+        cmd_tts = [
             "edge-tts",
             "--voice", voice,
+            "--rate=+1%",
             "--text", script,
-            "--write-media", str(out_file)
+            "--write-media", str(raw_file)
         ]
-        subprocess.run(cmd, check=True)
+        subprocess.run(cmd_tts, check=True)
+        
+        # Trim trailing silence to guarantee natural crisp inter-act pauses
+        cmd_trim = [
+            "ffmpeg", "-y",
+            "-i", str(raw_file),
+            "-af", "areverse,silenceremove=start_periods=1:start_duration=0.05:start_threshold=-40dB,areverse",
+            str(out_file)
+        ]
+        subprocess.run(cmd_trim, check=True, capture_output=True)
+        if raw_file.exists():
+            raw_file.unlink()
 
 def mix_soundtrack():
-    print("Mixing master soundtrack (narration + SFX + tail fade)...")
+    print("Mixing master soundtrack with calibrated tight pauses (1.3s - 1.6s between acts)...")
     cmd = [
         "ffmpeg", "-y",
         "-i", "assets/audio/act1.mp3",
@@ -89,16 +102,16 @@ def mix_soundtrack():
         "-i", "assets/audio/riser.mp3",
         "-i", "assets/audio/chime.mp3",
         "-filter_complex",
-        "[0:a]adelay=300|300,volume=1.0[n1];"
-        "[1:a]adelay=14000|14000,volume=1.0[n2];"
-        "[2:a]adelay=27500|27500,volume=1.0[n3];"
-        "[3:a]adelay=41000|41000,volume=1.0[n4];"
-        "[4:a]adelay=54500|54500,volume=1.0[n5];"
+        "[0:a]adelay=600|600,volume=1.0[n1];"
+        "[1:a]adelay=13800|13800,volume=1.0[n2];"
+        "[2:a]adelay=27200|27200,volume=1.0[n3];"
+        "[3:a]adelay=39800|39800,volume=1.0[n4];"
+        "[4:a]adelay=52400|52400,volume=1.0[n5];"
         "[5:a]adelay=13200|13200,volume=0.35[w1];"
         "[6:a]adelay=1000|1000,volume=0.30[c1];"
         "[7:a]adelay=17500|17500,volume=0.45[b1];"
         "[8:a]adelay=32000|32000,volume=0.30[r1];"
-        "[9:a]adelay=55000|55000,volume=0.35[ch1];"
+        "[9:a]adelay=53000|53000,volume=0.35[ch1];"
         "[n1][n2][n3][n4][n5][w1][c1][b1][r1][ch1]amix=inputs=10:duration=longest:dropout_transition=2[mixed];"
         "[mixed]apad=whole_dur=68,afade=t=out:st=65.5:d=2.5[outa]",
         "-map", "[outa]",
