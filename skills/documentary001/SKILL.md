@@ -96,7 +96,7 @@ ffmpeg -y \
     [7:a]adelay=17500|17500,volume=0.45[b1];\
     [8:a]adelay=32000|32000,volume=0.30[r1];\
     [9:a]adelay=55000|55000,volume=0.35[ch1];\
-    [n1][n2][n3][n4][n5][w1][c1][b1][r1][ch1]amix=inputs=10:duration=first:dropout_transition=2[mixed];\
+    [n1][n2][n3][n4][n5][w1][c1][b1][r1][ch1]amix=inputs=10:duration=longest:dropout_transition=2[mixed];\
     [mixed]apad=whole_dur=68,afade=t=out:st=65.5:d=2.5[outa]" \
   -map "[outa]" -c:a libmp3lame -b:a 192k \
   -map_metadata -1 -fflags +bitexact \
