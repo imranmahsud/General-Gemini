@@ -108,6 +108,8 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 ### 7. Essential Utilities
 | Tool | Purpose | Command |
 | :--- | :--- | :--- |
+| **Blip** | Fast direct device-to-device file transfer (Windows & Android mobile) | `winget install --id 9N7JSXC1SJK6 --source msstore` |
+| **Syncthing** | Continuous encrypted P2P folder synchronization | `winget install BillStewart.SyncthingWindowsSetup` |
 | **AutoHotkey v2** | Screen automation, global hotkeys | `choco install autohotkey -y` |
 | **SumatraPDF** | Ultra-fast lightweight PDF review | `choco install sumatrapdf -y` |
 | **7-Zip** | Archive decompression (tar, gz, zip, 7z) | `choco install 7zip -y` |
