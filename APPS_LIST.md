@@ -37,6 +37,8 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 | **Visual Studio Build Tools** | 2026 (18.9) | C++ compilation, native module builds | `choco install visualstudio2026buildtools -y` |
 | **Visual Studio Code** | 1.143+ | Code editing, extension host, terminal | `winget install Microsoft.VisualStudioCode` |
 | **Ollama** | 0.40.15+ | Local offline LLM inference engine (Qwen 3.5 4B) | `winget install Ollama.Ollama` & `ollama pull qwen3.5:4b` |
+| **CLI-Anything & cli-hub** | 0.4.1 | Headless CLI generation & app automation harnesses for agents (QGIS, Blender, FreeCAD) | `C:\tools\cli-anything\cli-hub` (`cli-hub`) |
+| **Agent Skills (Addy Osmani)** | 1.0.0 | Spec-driven development, planning, task breakdown & verification agent framework | `C:\tools\agent-skills` & `.gemini/config/skills` |
 
 ---
 
@@ -114,6 +116,8 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 | **SumatraPDF** | Ultra-fast lightweight PDF review | `choco install sumatrapdf -y` |
 | **7-Zip** | Archive decompression (tar, gz, zip, 7z) | `choco install 7zip -y` |
 | **WSL 2** | Linux environment for cross-platform workflows | `wsl --install` |
+| **witr** | Process & port launch-chain inspector (systemd, docker, PM2 to PID) | `winget install PranshuParmar.witr` (`witr`) |
+| **Mister Download Manager (MDM)** | Open-source Rust IDM replacement with multi-segment downloads, headless daemon & CLI | `C:\tools\misterdownloadmanager` (`mdm-cli` 0.5.2) |
 
 ---
 
@@ -181,6 +185,7 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 | **Faster-Whisper** | Fast, offline word-level timestamped subtitle extractor on CPU (int8) | CLI tool `whisper-ctranslate2` (`uv tool install --python 3.12 whisper-ctranslate2`) |
 | **character-timeline-animation skill** | Agent skill for 2D/3D character design consistency & 5-parameter timeline prompts | Agent skill in `skills/character-timeline-animation` |
 | **programmatic-video skill** | Agent skill for headless code-to-video and subtitle workflows | Agent skill in `skills/programmatic-video` |
+| **Fuobe** | ComfyUI-powered open creative studio with Next.js frontend & 22 media creation skills | Cloned in `C:\tools\fuobe` & skills in `skills/` |
 
 ---
 
