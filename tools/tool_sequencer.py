@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 PC Tool Sequencer & App Orchestration System
-Authoritative tool sequence planner and preflight validator for installed PC software.
+Authoritative tool sequence planner, semantic intent matcher, and preflight validator.
+Automatically recalls optimal tool sequences without requiring the user to remember tool names.
 """
 
 import os
@@ -146,6 +147,16 @@ APP_REGISTRY = {
         "syntax": "colmap.bat automatic_reconstructor --workspace_path <path> --image_path <path>",
         "docs": "https://colmap.github.io/cli.html"
     },
+    "visualsfm_cuda": {
+        "name": "VisualSFM (CUDA 64-bit)",
+        "category": "GPU Structure-from-Motion",
+        "primary_interface": "Desktop / Headless CLI",
+        "cli_path": r"C:\PortableApps\VisualSFM_windows_cuda_64bit\VisualSFM.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "VisualSFM.exe sfm+pmvs <images_dir> <output.nvm>",
+        "docs": "http://ccwu.me/vsfm/"
+    },
 
     # 4. Binary Analysis & Reverse Engineering
     "ghidra": {
@@ -179,7 +190,7 @@ APP_REGISTRY = {
         "docs": "https://www.wireshark.org/docs/man-pages/tshark.html"
     },
 
-    # 5. Presentation, Video & Content
+    # 5. Core Media & Document Presentation
     "ffmpeg": {
         "name": "FFmpeg 9.0.2",
         "category": "Media Transcoding & Zero-Metadata Scrubbing",
@@ -201,7 +212,77 @@ APP_REGISTRY = {
         "docs": "https://github.com/imranmahsud/General-Gemini"
     },
 
-    # 6. PortableApps Suite
+    # 6. Newly Added & Superior PortableApps
+    "losslesscut": {
+        "name": "LosslessCut Portable",
+        "category": "Lossless Video/Audio Trimmer & Joiner",
+        "primary_interface": "Visual & Subprocess Engine",
+        "cli_path": r"C:\PortableApps\LosslessCut-win joiner cutter without encode\LosslessCut.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "LosslessCut.exe <video.mp4> (Instant keyframe cut without transcoding)",
+        "docs": "https://github.com/mifi/lossless-cut"
+    },
+    "mkvmerge": {
+        "name": "MKVToolNix Multiplexer (mkvmerge)",
+        "category": "Lossless Multi-Stream Multiplexing",
+        "primary_interface": "Headless CLI (mkvmerge.exe)",
+        "cli_path": r"C:\PortableApps\mkvtoolnix\mkvmerge.exe",
+        "mcp_server": None,
+        "test_cmd": r'"C:\PortableApps\mkvtoolnix\mkvmerge.exe" --version',
+        "syntax": "mkvmerge.exe -o <out.mkv> <video.mp4> <audio.m4a> <subs.srt>",
+        "docs": "https://mkvtoolnix.download/doc/mkvmerge.html"
+    },
+    "mkvextract": {
+        "name": "MKVToolNix Track Extractor",
+        "category": "Elementary Stream Demuxing",
+        "primary_interface": "Headless CLI (mkvextract.exe)",
+        "cli_path": r"C:\PortableApps\mkvtoolnix\mkvextract.exe",
+        "mcp_server": None,
+        "test_cmd": r'"C:\PortableApps\mkvtoolnix\mkvextract.exe" --version',
+        "syntax": "mkvextract.exe tracks <in.mkv> 0:<video.h264> 1:<audio.aac>",
+        "docs": "https://mkvtoolnix.download/doc/mkvextract.html"
+    },
+    "mkvpropedit": {
+        "name": "MKVToolNix In-Place Header Editor",
+        "category": "Zero-Rewrite Metadata & Track Modifier",
+        "primary_interface": "Headless CLI (mkvpropedit.exe)",
+        "cli_path": r"C:\PortableApps\mkvtoolnix\mkvpropedit.exe",
+        "mcp_server": None,
+        "test_cmd": r'"C:\PortableApps\mkvtoolnix\mkvpropedit.exe" --version',
+        "syntax": "mkvpropedit.exe <file.mkv> --edit info --set \"title=<TITLE>\"",
+        "docs": "https://mkvtoolnix.download/doc/mkvpropedit.html"
+    },
+    "antidupl": {
+        "name": "AntiDupl.NET Image Deduplicator",
+        "category": "Perceptual & Sub-Pixel Duplicate Detection",
+        "primary_interface": "Desktop / Automated Scanner",
+        "cli_path": r"C:\PortableApps\01-FILE OPERATION APPS\AntiDupl.NET-2.3.12 (Image Duplicate Finder)\AntiDupl.NET-2.3.12\AntiDupl.NET.WinForms.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "AntiDupl.NET.WinForms.exe (Detects blurred, resized, or re-compressed duplicates)",
+        "docs": "https://github.com/ermig1979/AntiDupl"
+    },
+    "clonespy": {
+        "name": "CloneSpy Deduplicator",
+        "category": "Byte-Level & Hardlink Deduplication",
+        "primary_interface": "Desktop / Scripted Batch",
+        "cli_path": r"C:\PortableApps\01-FILE OPERATION APPS\CloneSpy\CloneSpy.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "CloneSpy.exe (Replaces identical files with hardlinks/symlinks)",
+        "docs": "http://www.clonespy.com/"
+    },
+    "diffmerge": {
+        "name": "DiffMerge Stable",
+        "category": "Visual File & Directory Diffing",
+        "primary_interface": "Headless CLI / GUI (sgdm.exe)",
+        "cli_path": r"C:\PortableApps\01-FILE OPERATION APPS\DiffMerge_4_2_0_697_stable_x86\sgdm.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "sgdm.exe /title1=\"Original\" /title2=\"Modified\" file1 file2",
+        "docs": "https://sourcegear.com/diffmerge/"
+    },
     "pdftk": {
         "name": "PDFtk Portable",
         "category": "PDF Manipulation & Stamping",
@@ -305,9 +386,108 @@ APP_REGISTRY = {
 }
 
 WORKFLOW_SEQUENCES = {
+    # 1. Superior Lossless Video Pipeline
+    "lossless_video_slicing_multiplexing": {
+        "title": "Lossless Video Slicing & MKV Multiplexing Pipeline",
+        "goal": "Trim, cut, and multiplex multi-track video, voiceover, and subtitles in seconds with ZERO re-encoding and ZERO quality loss.",
+        "keywords": ["cut video", "trim video", "lossless cut", "join clips", "mkv", "merge audio video", "subtitles", "fast video edit"],
+        "superiority_reason": "50x faster than FFmpeg transcoding; preserves 100% original pixel quality and avoids CPU/GPU thermal load by cutting on keyframes and remuxing stream packets directly.",
+        "steps": [
+            {
+                "step": 1,
+                "tool": "losslesscut",
+                "role": "Lossless Keyframe Slicing & Trimming",
+                "action": "Use LosslessCut to isolate scenes at I-frame boundaries; export cut segments with zero generation loss."
+            },
+            {
+                "step": 2,
+                "tool": "mp3gain",
+                "role": "Lossless Audio Leveling",
+                "action": "Execute mp3gain.exe -r -k -d 0 on voiceover narration track to normalize peak loudness."
+            },
+            {
+                "step": 3,
+                "tool": "mkvmerge",
+                "role": "Ultra-Fast Multi-Stream Multiplexing",
+                "action": "Run mkvmerge.exe -o final_master.mkv --default-track 0:yes cut_video.mp4 --language 0:eng narration.mp3 --language 0:eng subtitles.srt."
+            },
+            {
+                "step": 4,
+                "tool": "mkvpropedit",
+                "role": "In-Place Header Tag Injection",
+                "action": "Execute mkvpropedit.exe final_master.mkv --edit info --set \"title=Project Master Deliverable\" in 5 milliseconds without rewriting multi-GB file."
+            },
+            {
+                "step": 5,
+                "tool": "mediainfo",
+                "role": "Automated Quality Control Gate",
+                "action": "Run MediaInfo.exe --Output=JSON final_master.mkv to verify sync, frame rates, and bitrates."
+            }
+        ]
+    },
+
+    # 2. Perceptual Image & Survey Deduplication
+    "perceptual_image_survey_deduplication": {
+        "title": "Perceptual Image & Survey Photo Deduplication Pipeline",
+        "goal": "Purge duplicate drone survey photos, site inspections, and CAD textures even if resized, re-compressed, or slightly cropped.",
+        "keywords": ["duplicate images", "photo duplicates", "clean photos", "deduplicate", "survey images", "similar pictures"],
+        "superiority_reason": "Standard MD5/SHA256 checksums fail when images are resized or re-compressed; AntiDupl uses perceptual sub-pixel algorithms to catch defective or redundant photos.",
+        "steps": [
+            {
+                "step": 1,
+                "tool": "everything",
+                "role": "Instant File Discovery",
+                "action": "Execute Everything.exe -search \"ext:jpg;png;tif D:\\Survey\" -export-csv survey_manifest.csv in under 1 second."
+            },
+            {
+                "step": 2,
+                "tool": "antidupl",
+                "role": "Perceptual Sub-Pixel Deduplication",
+                "action": "Run AntiDupl.NET on target image repository to identify blurred, defective, and near-identical captures."
+            },
+            {
+                "step": 3,
+                "tool": "exiftool_portable",
+                "role": "Telemetry GPS Integrity Audit",
+                "action": "Run exiftool.exe on surviving photos to confirm valid GPS Latitude/Longitude and camera timestamps."
+            }
+        ]
+    },
+
+    # 3. Clean Stream Demuxing & Repurposing
+    "clean_stream_demuxing_repurposing": {
+        "title": "Lossless Stream Demuxing & Asset Repurposing Pipeline",
+        "goal": "Extract pristine raw video streams, multi-language audio stems, and subtitles from container files without re-encoding.",
+        "keywords": ["extract audio", "demux", "extract stream", "rip audio", "extract subtitles", "split mkv"],
+        "superiority_reason": "Demuxes byte-exact bitstreams without re-compression degradation; avoids FFmpeg container drift.",
+        "steps": [
+            {
+                "step": 1,
+                "tool": "mediainfo",
+                "role": "Container Track Identification",
+                "action": "Inspect input file with MediaInfo.exe to locate track indices (Video ID 0, Audio ID 1, Subtitle ID 2)."
+            },
+            {
+                "step": 2,
+                "tool": "mkvextract",
+                "role": "Pristine Elementary Stream Extraction",
+                "action": "Execute mkvextract.exe tracks source.mkv 0:video_raw.h264 1:narration_clean.aac 2:timing.srt."
+            },
+            {
+                "step": 3,
+                "tool": "mp3gain",
+                "role": "Voice Track Loudness Normalization",
+                "action": "Level extracted narration loudness losslessly with mp3gain.exe."
+            }
+        ]
+    },
+
+    # 4. Flood Hazard Assessment
     "flood_hazard_assessment": {
         "title": "Flood Hazard Modeling & Costed Protection Bund Workflow",
         "goal": "From raw DEM and rainfall data to 2D hydrodynamic simulation, risk mapping, and KPK MRS BOQ.",
+        "keywords": ["flood", "hec-ras", "hecras", "river", "inundation", "bund", "embankment", "stone pitching", "swmm", "hydraulics"],
+        "superiority_reason": "Contract-bound automation via QGIS Agent MCP, headless SWMM, and HEC-RAS MCP with integrated KPK MRS-2025 rates.",
         "steps": [
             {
                 "step": 1,
@@ -341,9 +521,13 @@ WORKFLOW_SEQUENCES = {
             }
         ]
     },
+
+    # 5. Water Supply Distribution
     "water_supply_distribution": {
         "title": "Pressurized Water Supply Distribution Network Workflow",
         "goal": "Design, hydraulic simulation, profile drawings, and material takeoffs.",
+        "keywords": ["water supply", "pipe network", "epanet", "water distribution", "trench", "pipeline", "sluice valve"],
+        "superiority_reason": "Links GIS spatial terrain nodes directly to EPANET solver, AutoCAD core console, and KPK MRS pipe schedules.",
         "steps": [
             {
                 "step": 1,
@@ -371,9 +555,13 @@ WORKFLOW_SEQUENCES = {
             }
         ]
     },
+
+    # 6. Architectural BIM & Walkthrough
     "architectural_bim_visualization": {
         "title": "Architectural Design, BIM & Hyper-Realistic Animation Workflow",
         "goal": "From conceptual layout to BIM compliance and cinematic client walkthrough.",
+        "keywords": ["bim", "architecture", "revit", "freecad", "sketchup", "sweethome3d", "blender", "rendering", "walkthrough"],
+        "superiority_reason": "Combines rapid Sweet Home 3D space planning with FreeCAD/Revit BIM intelligence and Blender 5.2 Cycles renders.",
         "steps": [
             {
                 "step": 1,
@@ -407,63 +595,47 @@ WORKFLOW_SEQUENCES = {
             }
         ]
     },
-    "drone_photogrammetry_survey": {
-        "title": "Drone Aerial Survey, Point Cloud & Topographic Contouring",
-        "goal": "Process aerial drone photography into georeferenced DEM, contours, and 3D terrain meshes.",
+
+    # 7. Drone Aerial Geotagging & GPU Photogrammetry
+    "drone_geotag_photogrammetry": {
+        "title": "Drone Aerial Geotagging & GPU Photogrammetry Pipeline",
+        "goal": "Reconcile flight telemetry GPS logs with aerial imagery, solve dense point clouds, and produce terrain models.",
+        "keywords": ["drone", "uav", "photogrammetry", "colmap", "visualsfm", "geotag", "point cloud", "dem", "contours", "ortho"],
+        "superiority_reason": "Hardware-accelerated CUDA SiftGPU via VisualSFM and COLMAP with automated CloudCompare ground decimation.",
         "steps": [
             {
                 "step": 1,
-                "tool": "colmap",
-                "role": "Structure from Motion & Dense Reconstruction",
-                "action": "Run colmap.bat automatic_reconstructor to extract SIFT keypoints, perform bundle adjustment, and generate dense point cloud."
+                "tool": "exiftool_portable",
+                "role": "Telemetry GPS Time-Sync Geotagging",
+                "action": "Execute exiftool.exe -geotag=flight_telemetry.gpx -overwrite_original ./drone_raw_images/ to embed WGS84 coordinates."
             },
             {
                 "step": 2,
+                "tool": "visualsfm_cuda",
+                "role": "GPU Structure-from-Motion & Dense Stereo",
+                "action": "Run VisualSFM.exe / colmap.bat to extract keypoints with CUDA acceleration and reconstruct dense point cloud."
+            },
+            {
+                "step": 3,
                 "tool": "cloudcompare",
-                "role": "Point Cloud Filtering & Classification",
-                "action": "Execute CloudCompare.exe -SILENT -O cloud.ply -SS SPATIAL 0.05 to downsample noise, classify ground points, and export LAS."
-            },
-            {
-                "step": 3,
-                "tool": "qgis",
-                "role": "DEM Raster & Topographic Contours",
-                "action": "Load ground LAS into QGIS via qgis_agent_mcp, generate 1m/5m elevation contour vectors, and produce high-resolution orthomosaic."
-            }
-        ]
-    },
-    "binary_reverse_engineering": {
-        "title": "Binary Forensics, Protocol & Reverse Engineering Pipeline",
-        "goal": "Triage unknown executable/firmware/APK, extract decompiled source, and analyze network protocols.",
-        "steps": [
-            {
-                "step": 1,
-                "tool": "jadx",
-                "role": "APK Decompilation (Mobile) or Triage",
-                "action": "Execute jadx.bat -d <out_dir> <target.apk> to reconstruct Java source and AndroidManifest.xml."
-            },
-            {
-                "step": 2,
-                "tool": "ghidra",
-                "role": "Native Decompilation & Symbol Recovery",
-                "action": "Run analyzeHeadless.bat on native x64/ARM binary to auto-analyze entry points, recover functions, and export C pseudo-code."
-            },
-            {
-                "step": 3,
-                "tool": "wireshark",
-                "role": "Live Protocol & Network Inspection",
-                "action": "Run tshark.exe to capture and dissect outbound RPC/REST/TLS handshakes and decode payload structures."
+                "role": "Cloud Decimation & Noise Stripping",
+                "action": "Execute CloudCompare.exe -SILENT -O dense.ply -SS SPATIAL 0.05 to clean artifacts and export LAS."
             },
             {
                 "step": 4,
-                "tool": "ppt_master",
-                "role": "Forensic Dossier Presentation",
-                "action": "Generate executive forensic technical slides documenting vulnerability attack surface and logic flow."
+                "tool": "qgis",
+                "role": "Orthomosaic & Contour Generation",
+                "action": "Load ground LAS into QGIS via qgis_agent_mcp to generate 1m topographic contours."
             }
         ]
     },
+
+    # 8. Engineering Tender Dossier & PDF Assembly
     "pdf_engineering_dossier": {
         "title": "Engineering Technical Dossier & PDF Assembly Workflow",
         "goal": "Compile calculation sheets, drawings, and BOQ into a unified, watermarked, stamped PDF portfolio.",
+        "keywords": ["pdf", "pdftk", "merge pdf", "watermark", "stamp", "dossier", "tender document", "boq print"],
+        "superiority_reason": "Zero-dependency native PDFtk execution; processes thousands of pages in seconds without Acrobat subscription overhead.",
         "steps": [
             {
                 "step": 1,
@@ -491,39 +663,13 @@ WORKFLOW_SEQUENCES = {
             }
         ]
     },
-    "drone_geotag_photogrammetry": {
-        "title": "Drone Aerial Geotagging & GPU Photogrammetry Pipeline",
-        "goal": "Reconcile flight telemetry GPS logs with aerial imagery, solve dense point clouds, and produce terrain models.",
-        "steps": [
-            {
-                "step": 1,
-                "tool": "exiftool_portable",
-                "role": "Telemetry GPS Time-Sync Geotagging",
-                "action": "Execute exiftool.exe -geotag=flight_telemetry.gpx -overwrite_original ./drone_raw_images/ to embed WGS84 coordinates."
-            },
-            {
-                "step": 2,
-                "tool": "colmap",
-                "role": "Structure from Motion & Dense Stereo",
-                "action": "Execute colmap.bat automatic_reconstructor to extract features and solve dense point cloud."
-            },
-            {
-                "step": 3,
-                "tool": "cloudcompare",
-                "role": "Cloud Decimation & Noise Stripping",
-                "action": "Execute CloudCompare.exe -SILENT -O dense.ply -SS SPATIAL 0.05 to clean artifacts and export LAS."
-            },
-            {
-                "step": 4,
-                "tool": "qgis",
-                "role": "Orthomosaic & Contour Generation",
-                "action": "Load ground LAS into QGIS via qgis_agent_mcp to generate 1m topographic contours."
-            }
-        ]
-    },
+
+    # 9. AI Super-Resolution Media Enhancement
     "ai_media_enhancement": {
         "title": "Audio Normalization & Real-ESRGAN AI Super-Resolution Workflow",
         "goal": "Produce broadcast-grade documentary footage, upscale historical maps/renderings, and level voiceover tracks.",
+        "keywords": ["upscale", "super resolution", "realesrgan", "voiceover", "mp3gain", "audio level", "remux", "ytdlp"],
+        "superiority_reason": "Leverages GPU Vulkan AI inference for 4x resolution reconstruction and ReplayGain mathematical loudness correction.",
         "steps": [
             {
                 "step": 1,
@@ -557,27 +703,37 @@ WORKFLOW_SEQUENCES = {
             }
         ]
     },
-    "bulk_asset_triage": {
-        "title": "High-Volume Project Asset Indexing & Batch Sanitization",
-        "goal": "Index millions of survey files, apply structured regex naming, and normalize file timestamps.",
+
+    # 10. Binary Reverse Engineering
+    "binary_reverse_engineering": {
+        "title": "Binary Forensics, Protocol & Reverse Engineering Pipeline",
+        "goal": "Triage unknown executable/firmware/APK, extract decompiled source, and analyze network protocols.",
+        "keywords": ["reverse engineering", "ghidra", "jadx", "apk", "decompile", "disassemble", "wireshark", "tshark", "binary"],
+        "superiority_reason": "Headless Ghidra decompilation coupled with real-time TShark protocol packet dissection.",
         "steps": [
             {
                 "step": 1,
-                "tool": "everything",
-                "role": "Instant NTFS Volume Indexing",
-                "action": "Run Everything.exe -search <query> -export-csv project_files.csv to catalog all relevant assets in milliseconds."
+                "tool": "jadx",
+                "role": "APK Decompilation (Mobile) or Triage",
+                "action": "Execute jadx.bat -d <out_dir> <target.apk> to reconstruct Java source and AndroidManifest.xml."
             },
             {
                 "step": 2,
-                "tool": "arenc",
-                "role": "Programmatic Regex Batch Renaming",
-                "action": "Run arenc.exe -p naming_rules.aren -s <source_dir> to standardize project prefixes and date structures."
+                "tool": "ghidra",
+                "role": "Native Decompilation & Symbol Recovery",
+                "action": "Run analyzeHeadless.bat on native x64/ARM binary to auto-analyze entry points, recover functions, and export C pseudo-code."
             },
             {
                 "step": 3,
-                "tool": "irfanview",
-                "role": "Mass Image Thumbnailing & Format Conversion",
-                "action": "Run i_view64.exe to convert heavy TIFF/PNG assets to optimized WebP documentation formats."
+                "tool": "wireshark",
+                "role": "Live Protocol & Network Inspection",
+                "action": "Run tshark.exe to capture and dissect outbound RPC/REST/TLS handshakes and decode payload structures."
+            },
+            {
+                "step": 4,
+                "tool": "ppt_master",
+                "role": "Forensic Dossier Presentation",
+                "action": "Generate executive forensic technical slides documenting vulnerability attack surface and logic flow."
             }
         ]
     }
@@ -605,16 +761,51 @@ def validate_environment():
         })
     return report
 
-def get_sequence(workflow_id):
-    """Retrieve optimal tool sequence for a workflow."""
-    if workflow_id not in WORKFLOW_SEQUENCES:
-        return None
-    return WORKFLOW_SEQUENCES[workflow_id]
+def find_best_sequence(query_str):
+    """Semantic match from natural language intent to optimal sequence."""
+    query_lower = query_str.lower().strip()
+    scores = []
+    for key, wf in WORKFLOW_SEQUENCES.items():
+        score = 0
+        title_lower = wf["title"].lower()
+        goal_lower = wf["goal"].lower()
+        keywords = wf.get("keywords", [])
+        
+        for word in query_lower.split():
+            if word in title_lower:
+                score += 3
+            if word in goal_lower:
+                score += 2
+            for kw in keywords:
+                if word in kw:
+                    score += 4
+                if kw in query_lower:
+                    score += 6
+        if score > 0:
+            scores.append((score, key, wf))
+    
+    scores.sort(key=lambda x: x[0], reverse=True)
+    return scores
+
+def print_workflow_details(key, seq):
+    print(f"\n========================================================")
+    print(f" WORKFLOW IDENTIFIED: {seq['title']}")
+    print(f" GOAL: {seq['goal']}")
+    print(f" WHY THIS IS SUPERIOR: {seq.get('superiority_reason', 'Optimized execution')}")
+    print(f"========================================================")
+    for s in seq["steps"]:
+        tool_info = APP_REGISTRY.get(s["tool"], {})
+        print(f"\n[Step {s['step']}] {s['role']} -> Tool: {tool_info.get('name', s['tool'])}")
+        print(f"  Interface: {tool_info.get('primary_interface')}")
+        print(f"  Command / Action: {s['action']}")
+        print(f"  Syntax: {tool_info.get('syntax')}")
+    print("\n========================================================\n")
 
 def main():
-    parser = argparse.ArgumentParser(description="PC Tool Sequencer & Execution Engine")
+    parser = argparse.ArgumentParser(description="PC Tool Sequencer & Semantic Intent Recall Engine")
     parser.add_argument("--list-workflows", action="store_true", help="List all available automated workflows")
     parser.add_argument("--sequence", type=str, help="Show tool sequence for a specific workflow key")
+    parser.add_argument("--find", type=str, help="Natural language query to recall optimal tool sequence")
     parser.add_argument("--validate", action="store_true", help="Validate all PC application paths & interfaces")
     args = parser.parse_args()
 
@@ -625,31 +816,38 @@ def main():
         print()
         return
 
+    if args.find:
+        matches = find_best_sequence(args.find)
+        if not matches:
+            print(f"\nNo exact match for '{args.find}'. Listing all workflows:")
+            for key, wf in WORKFLOW_SEQUENCES.items():
+                print(f"- {key}: {wf['title']}")
+            print()
+            return
+        best_score, best_key, best_wf = matches[0]
+        print_workflow_details(best_key, best_wf)
+        if len(matches) > 1:
+            print("Alternative matching workflows:")
+            for s, k, w in matches[1:4]:
+                print(f"  * {k}: {w['title']}")
+            print()
+        return
+
     if args.sequence:
-        seq = get_sequence(args.sequence)
+        seq = WORKFLOW_SEQUENCES.get(args.sequence)
         if not seq:
             print(f"Error: Workflow '{args.sequence}' not found. Use --list-workflows.")
             sys.exit(1)
-        print(f"\n========================================================")
-        print(f" WORKFLOW: {seq['title']}")
-        print(f" GOAL: {seq['goal']}")
-        print(f"========================================================")
-        for s in seq["steps"]:
-            tool_info = APP_REGISTRY.get(s["tool"], {})
-            print(f"\n[Step {s['step']}] {s['role']} -> Tool: {tool_info.get('name', s['tool'])}")
-            print(f"  Interface: {tool_info.get('primary_interface')}")
-            print(f"  Command / Action: {s['action']}")
-            print(f"  Syntax: {tool_info.get('syntax')}")
-        print("\n========================================================\n")
+        print_workflow_details(args.sequence, seq)
         return
 
     if args.validate:
         results = validate_environment()
         print("\n=== PC Application Readiness & Interface Status ===")
-        print(f"{'App ID':<15} {'Name':<30} {'Interface':<30} {'Status':<15}")
-        print("-" * 90)
+        print(f"{'App ID':<20} {'Name':<35} {'Interface':<35} {'Status':<15}")
+        print("-" * 110)
         for r in results:
-            print(f"{r['id']:<15} {r['name']:<30} {r['interface']:<30} {r['status']:<15}")
+            print(f"{r['id']:<20} {r['name']:<35} {r['interface']:<35} {r['status']:<15}")
         print()
         return
 
