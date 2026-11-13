@@ -34,15 +34,16 @@ This document provides the authoritative operational reference, headless CLI com
 | **Advanced Renamer** | Headless Regex Renamer | `C:\PortableApps\Advanced renamer portable\arenc.exe` | `arenc.exe -p <rules.aren> -s <source_dir> -d <target_dir>` |
 | **MP3Gain** | ReplayGain Loudness Level | `C:\PortableApps\mp3gain-win-full-1_2_5\mp3gain.exe` | `mp3gain.exe -r -k -d 0 <narration.mp3>` |
 | **ImageJ (NIH)** | Scientific Image Analysis | `C:\PortableApps\ImageJ\ImageJ.exe` | `ImageJ.exe -macro <measure.ijm> <image.tif>` |
-| **Everything Search** | Instant NTFS Volume Index | `C:\PortableApps\Everything-1.4.1.928.x64\Everything.exe` | `Everything.exe -search <query> -export-csv <results.csv>` |
+| **Everything Search** | Instant NTFS Volume Index | `C:\PortableApps\Everything-1.4.1.928.x64\Everything.exe` (v1.4.1.1032) | `Everything.exe -search <query> -export-csv <results.csv>` |
 | **ExifTool Portable** | Geotag & Metadata Engine | `C:\PortableApps\geosetter\tools\exiftool.exe` | `exiftool.exe -geotag=<track.gpx> -overwrite_original <images_dir>` |
-| **LosslessCut Portable** | Lossless Video/Audio Trimmer | `C:\PortableApps\LosslessCut-win joiner cutter without encode\LosslessCut.exe` | Rapid keyframe cutting at I-frame boundaries with 0% transcoding CPU overhead |
-| **MKVToolNix (mkvmerge)** | High-Speed Multi-Stream Muxer | `C:\PortableApps\mkvtoolnix\mkvmerge.exe` | `mkvmerge.exe -o <out.mkv> <video.mp4> <audio.m4a> <subs.srt>` |
-| **MKVToolNix (mkvextract)**| Bitstream Track Demuxer | `C:\PortableApps\mkvtoolnix\mkvextract.exe` | `mkvextract.exe tracks <in.mkv> 0:<video.h264> 1:<audio.aac>` |
-| **MKVToolNix (mkvpropedit)**| In-Place Header/Tag Editor | `C:\PortableApps\mkvtoolnix\mkvpropedit.exe` | `mkvpropedit.exe <file.mkv> --edit info --set "title=<TITLE>"` (instant 5ms tag edit) |
+| **LosslessCut Portable** | Lossless Video/Audio Trimmer | `C:\PortableApps\LosslessCut-win joiner cutter without encode\LosslessCut.exe` (v3.70.2) | Rapid keyframe cutting at I-frame boundaries with 0% transcoding CPU overhead |
+| **MKVToolNix (mkvmerge)** | High-Speed Multi-Stream Muxer | `C:\PortableApps\mkvtoolnix\mkvmerge.exe` (v103.0 'The Darkness') | `mkvmerge.exe -o <out.mkv> <video.mp4> <audio.m4a> <subs.srt>` |
+| **MKVToolNix (mkvextract)**| Bitstream Track Demuxer | `C:\PortableApps\mkvtoolnix\mkvextract.exe` (v103.0) | `mkvextract.exe tracks <in.mkv> 0:<video.h264> 1:<audio.aac>` |
+| **MKVToolNix (mkvpropedit)**| In-Place Header/Tag Editor | `C:\PortableApps\mkvtoolnix\mkvpropedit.exe` (v103.0) | `mkvpropedit.exe <file.mkv> --edit info --set "title=<TITLE>"` (instant 5ms tag edit) |
 | **AntiDupl.NET** | Perceptual Image Deduplicator | `C:\PortableApps\01-FILE OPERATION APPS\AntiDupl.NET-2.3.12 (Image Duplicate Finder)\AntiDupl.NET-2.3.12\AntiDupl.NET.WinForms.exe` | Detects defective, blurry, resized, or re-compressed duplicate photos |
 | **CloneSpy** | Hardlink / Byte Deduplicator | `C:\PortableApps\01-FILE OPERATION APPS\CloneSpy\CloneSpy.exe` | Byte-level file deduplication and automated NTFS hardlinking |
 | **DiffMerge Stable** | Visual & CLI Difference Engine | `C:\PortableApps\01-FILE OPERATION APPS\DiffMerge_4_2_0_697_stable_x86\sgdm.exe` | `sgdm.exe /title1="Original" /title2="Modified" file1 file2` |
+| **yt-dlp Portable** | Media & Stream Downloader | `C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\yt-dlp.exe` (2026.10.26) | `yt-dlp.exe -f bestvideo+bestaudio/best <URL>` |
 
 ---
 
