@@ -199,6 +199,28 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 | **Awesome Photogrammetry** | Latest | Curated knowledge base of photogrammetry tools, libraries, and benchmarks | `C:\tools\photogrammetry\awesome-photogrammetry` |
 | **Python 3D Toolkit** | Latest | Point cloud and mesh manipulation (`trimesh`, `scipy`, `numpy`, `plyfile`, `laspy`) | Installed in Python 3.12 environment |
 
+---
+
+### 14. Portable Applications & Automation Suite (`C:\PortableApps`)
+| Application | Version | Role in Orchestrated Workflows | Verified Executable Path |
+| :--- | :--- | :--- | :--- |
+| **PDFtk Portable** | 1.41 | Headless PDF merging, bursting, watermarking, stamping | `C:\PortableApps\PDFTKBuilderPortable\App\pdftkbuilder\pdftk.exe` |
+| **Real-ESRGAN Vulkan** | Latest | AI 4x super-resolution upscaling for images & frames | `C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\realesrgan-ncnn-vulkan.exe` |
+| **MediaInfo CLI** | Latest | Audiovisual stream, container & codec QC audit | `C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\MediaInfo.exe` |
+| **yt-dlp Portable** | 2025+ | High-bitrate video, audio & stream asset downloader | `C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\yt-dlp.exe` |
+| **IrfanView x64** | 4.62 | Headless batch image resizing, format conversion & crop | `C:\PortableApps\irfanview462_x64\i_view64.exe` |
+| **Advanced Renamer** | 3.80 | Headless regex file & folder batch renaming | `C:\PortableApps\Advanced renamer portable\arenc.exe` |
+| **MP3Gain** | 1.4.6 | ReplayGain lossless volume normalization | `C:\PortableApps\mp3gain-win-full-1_2_5\mp3gain.exe` |
+| **ImageJ (NIH)** | 1.50 | Scientific image analysis, segmentation & macro scripting | `C:\PortableApps\ImageJ\ImageJ.exe` |
+| **Everything Search** | 1.4.1 | Sub-second NTFS index search & CSV export | `C:\PortableApps\Everything-1.4.1.928.x64\Everything.exe` |
+| **ExifTool Portable** | Latest | Camera EXIF & GPS flight telemetry sync engine | `C:\PortableApps\geosetter\tools\exiftool.exe` |
+| **BulkFileChanger** | Latest | Mass created/modified timestamp attribute setter | `C:\PortableApps\bulkfilechanger-x64\BulkFileChanger.exe` |
+| **SolveigMM Video Splitter** | Latest | Lossless I-frame accurate video trimming without re-encoding | `C:\PortableApps\SMMVSplitterBusinessPortable` |
+| **VisualSFM (CUDA)** | Latest | GPU CUDA-accelerated Structure-from-Motion photogrammetry | `C:\PortableApps\VisualSFM_windows_cuda_64bit\VisualSFM.exe` |
+| **SearchMyFiles** | Latest | Hash-based duplicate detection & deep regex disk search | `C:\PortableApps\searchmyfiles-x64\SearchMyFiles.exe` |
+| **SpaceSniffer** | 1.3.0 | Real-time visual disk tree-map storage diagnostic | `C:\PortableApps\spacesniffer_1_3_0_2\SpaceSniffer.exe` |
+
+
 
 ---
 

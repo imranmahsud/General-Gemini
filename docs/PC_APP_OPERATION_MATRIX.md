@@ -26,6 +26,16 @@ This document provides the authoritative operational reference, headless CLI com
 | **Wireshark / TShark** | Network Packet Analysis | `C:\Program Files\Wireshark\tshark.exe` | `tshark.exe -r <capture.pcapng> -Y <filter> -T fields -e <field>` |
 | **FFmpeg 9.0.2** | Bitexact Video Assembly | `ffmpeg` | `ffmpeg -i <in> -map_metadata -1 -fflags +bitexact -flags:v +bitexact -flags:a +bitexact <out>` |
 | **PPT-Master** | Presentations & Decks | `C:\tools\ppt-master` | `python -m ppt_master --template <id> --content <data.json>` |
+| **PDFtk Portable** | PDF Split / Merge / Stamp | `C:\PortableApps\PDFTKBuilderPortable\App\pdftkbuilder\pdftk.exe` | `pdftk.exe in1.pdf in2.pdf cat output combined.pdf`<br>`pdftk.exe in.pdf multistamp watermark.pdf output out.pdf` |
+| **Real-ESRGAN Vulkan** | AI Super-Resolution | `C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\realesrgan-ncnn-vulkan.exe` | `realesrgan-ncnn-vulkan.exe -i <in.png> -o <out.png> -s 4` |
+| **MediaInfo CLI** | Codec & Container Audit | `C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\MediaInfo.exe` | `MediaInfo.exe --Output=JSON <file.mp4>` |
+| **yt-dlp Portable** | Media & Stream Downloader | `C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\yt-dlp.exe` | `yt-dlp.exe -f bestvideo+bestaudio/best <URL>` |
+| **IrfanView x64** | Batch Image Converter | `C:\PortableApps\irfanview462_x64\i_view64.exe` | `i_view64.exe <in.png> /resize=(1920,1080) /aspectratio /convert=<out.webp>` |
+| **Advanced Renamer** | Headless Regex Renamer | `C:\PortableApps\Advanced renamer portable\arenc.exe` | `arenc.exe -p <rules.aren> -s <source_dir> -d <target_dir>` |
+| **MP3Gain** | ReplayGain Loudness Level | `C:\PortableApps\mp3gain-win-full-1_2_5\mp3gain.exe` | `mp3gain.exe -r -k -d 0 <narration.mp3>` |
+| **ImageJ (NIH)** | Scientific Image Analysis | `C:\PortableApps\ImageJ\ImageJ.exe` | `ImageJ.exe -macro <measure.ijm> <image.tif>` |
+| **Everything Search** | Instant NTFS Volume Index | `C:\PortableApps\Everything-1.4.1.928.x64\Everything.exe` | `Everything.exe -search <query> -export-csv <results.csv>` |
+| **ExifTool Portable** | Geotag & Metadata Engine | `C:\PortableApps\geosetter\tools\exiftool.exe` | `exiftool.exe -geotag=<track.gpx> -overwrite_original <images_dir>` |
 
 ---
 
@@ -103,6 +113,76 @@ flowchart LR
 1. **Decompilation**: Run JADX for APK (`jadx.bat -d out app.apk`) or Ghidra headless (`analyzeHeadless.bat`) for native Win32/x64 binaries.
 2. **Network Interception**: Run `tshark.exe -r capture.pcapng -Y "http.request or tls.handshake"` to isolate API endpoints and payloads.
 3. **Documentation**: Assemble findings into a forensic dossier using PPT-Master and Typst.
+
+---
+
+### Sequence 6: Engineering Technical Dossier & PDF Assembly
+```mermaid
+flowchart LR
+    A["DWG Drawing Sheets"] --> B["AutoCAD LT Console<br>(accoreconsole /s plot.scr)"]
+    B --> C["PDFtk Portable<br>(cat in1 in2 output master.pdf)"]
+    C --> D["PDFtk Portable<br>(multistamp watermark.pdf)"]
+    D --> E["IrfanView x64<br>(Cover Page Render / Thumbnail)"]
+```
+1. **CAD Plotting**: Headless batch export of drawing sheets into individual vector PDFs via AutoCAD LT `accoreconsole.exe`.
+2. **Document Collation**: Merge calculation sheets, specifications, and BOQs into one consolidated binder:
+   `pdftk.exe cover.pdf specs.pdf drawings.pdf boq.pdf cat output project_master.pdf`
+3. **Security & Watermarking**: Apply approved engineering stamps or confidential background marks:
+   `pdftk.exe project_master.pdf multistamp approved_stamp.pdf output tender_dossier.pdf`
+4. **Visual Presentation**: Generate high-contrast preview images with IrfanView:
+   `i_view64.exe tender_dossier.pdf[0] /resize=(1200,0) /convert=cover_preview.png`
+
+---
+
+### Sequence 7: Drone Aerial Geotagging & GPU Photogrammetry
+```mermaid
+flowchart LR
+    A["Raw Drone Images & GPX"] --> B["ExifTool Portable<br>(-geotag=track.gpx)"]
+    B --> C["COLMAP / VisualSFM<br>(Sparse & Dense SfM)"]
+    C --> D["CloudCompare CLI<br>(-SS SPATIAL 0.05)"]
+    D --> E["QGIS Agent MCP<br>(1m Elevation Contours)"]
+```
+1. **Telemetry Synchronization**: Embed GPS coordinates into raw photos from flight log:
+   `exiftool.exe -geotag=flight_telemetry.gpx -overwrite_original ./drone_raw_images/`
+2. **Dense Point Cloud Reconstruction**: Execute `COLMAP.bat` or `VisualSFM.exe` with CUDA GPU acceleration.
+3. **Point Cloud Filtration**: Clean outliers and downsample ground points with CloudCompare:
+   `CloudCompare.exe -SILENT -O dense.ply -C_EXPORT_FMT LAS -SS SPATIAL 0.05 -SAVE_CLOUDS`
+4. **Topographic GIS Products**: Import into QGIS via `qgis_agent_mcp` to generate orthomosaic rasters and contour lines.
+
+---
+
+### Sequence 8: AI Media Enhancement & Broadcast Audio Leveling
+```mermaid
+flowchart LR
+    A["Raw Media & Voiceover"] --> B["Real-ESRGAN Vulkan<br>(4x AI Image/Frame Upscale)"]
+    B --> C["MP3Gain CLI<br>(ReplayGain Lossless Leveling)"]
+    C --> D["FFmpeg 9.0.2<br>(Bitexact Zero-Metadata Encode)"]
+    D --> E["MediaInfo CLI<br>(Automated QC Verification)"]
+```
+1. **AI Super-Resolution**: Upscale low-resolution satellite maps, historic photos, or video frames:
+   `realesrgan-ncnn-vulkan.exe -i lowres_map.png -o highres_map.png -s 4`
+2. **Lossless Audio Leveling**: Standardize documentary narration volume without re-encoding quality degradation:
+   `mp3gain.exe -r -k -d 0 narration.mp3`
+3. **Master Video Assembly**: Assemble video timeline in FFmpeg with zero-metadata bitexact scrubbing:
+   `ffmpeg -i video.mp4 -i narration.mp3 -map_metadata -1 -fflags +bitexact -c:v libx264 -c:a aac master.mp4`
+4. **Quality Control Gate**: Confirm bitrate, colorspace, and track sync:
+   `MediaInfo.exe --Output=JSON master.mp4`
+
+---
+
+### Sequence 9: High-Volume Asset Indexing & Batch Sanitization
+```mermaid
+flowchart LR
+    A["Unorganized Project Drive"] --> B["Everything Search<br>(-search -export-csv)"]
+    B --> C["Advanced Renamer CLI<br>(arenc -p rules.aren)"]
+    C --> D["IrfanView x64<br>(Mass Format Standardization)"]
+```
+1. **Instant Volume Search**: Catalog tens of thousands of project files in milliseconds:
+   `Everything.exe -search "D:\Projects\*.dwg" -export-csv dwg_inventory.csv`
+2. **Automated Batch Renaming**: Apply standardized project code, date format, and revision tagging:
+   `arenc.exe -p numbering_standard.aren -s "D:\Projects\Unsorted" -d "D:\Projects\Cleaned"`
+3. **Asset Optimization**: Convert raw high-res photos to compressed WebP previews for web dashboards:
+   `i_view64.exe "D:\Projects\Photos\*.jpg" /resize=(1920,1080) /aspectratio /convert="D:\Projects\Web\*.webp"`
 
 ---
 

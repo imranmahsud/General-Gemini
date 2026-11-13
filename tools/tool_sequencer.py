@@ -199,6 +199,108 @@ APP_REGISTRY = {
         "test_cmd": None,
         "syntax": "python -m ppt_master --template <id> --content <data.json>",
         "docs": "https://github.com/imranmahsud/General-Gemini"
+    },
+
+    # 6. PortableApps Suite
+    "pdftk": {
+        "name": "PDFtk Portable",
+        "category": "PDF Manipulation & Stamping",
+        "primary_interface": "Headless CLI (pdftk.exe)",
+        "cli_path": r"C:\PortableApps\PDFTKBuilderPortable\App\pdftkbuilder\pdftk.exe",
+        "mcp_server": None,
+        "test_cmd": r'"C:\PortableApps\PDFTKBuilderPortable\App\pdftkbuilder\pdftk.exe" --version',
+        "syntax": "pdftk.exe in1.pdf in2.pdf cat output combined.pdf",
+        "docs": "https://www.pdflabs.com/docs/pdftk-man-page/"
+    },
+    "realesrgan": {
+        "name": "Real-ESRGAN Vulkan AI",
+        "category": "AI Super-Resolution Upscaling",
+        "primary_interface": "Headless CLI (realesrgan-ncnn-vulkan.exe)",
+        "cli_path": r"C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\realesrgan-ncnn-vulkan.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "realesrgan-ncnn-vulkan.exe -i <input.png> -o <upscaled.png> -s 4",
+        "docs": "https://github.com/xinntao/Real-ESRGAN"
+    },
+    "mediainfo": {
+        "name": "MediaInfo CLI",
+        "category": "Media Stream & Codec Inspection",
+        "primary_interface": "Headless CLI (MediaInfo.exe)",
+        "cli_path": r"C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\MediaInfo.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "MediaInfo.exe --Output=JSON <media_file.mp4>",
+        "docs": "https://mediaarea.net/en/MediaInfo/Support/FAQ"
+    },
+    "ytdlp": {
+        "name": "yt-dlp Portable",
+        "category": "Media Stream & Asset Downloader",
+        "primary_interface": "Headless CLI (yt-dlp.exe)",
+        "cli_path": r"C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\yt-dlp.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "yt-dlp.exe -f bestvideo+bestaudio/best <URL>",
+        "docs": "https://github.com/yt-dlp/yt-dlp"
+    },
+    "irfanview": {
+        "name": "IrfanView x64",
+        "category": "Batch Image Processing & Conversion",
+        "primary_interface": "Headless CLI (i_view64.exe)",
+        "cli_path": r"C:\PortableApps\irfanview462_x64\i_view64.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "i_view64.exe <input.png> /resize=(1920,1080) /aspectratio /convert=<out.webp>",
+        "docs": "https://www.irfanview.com/main_what_is_engl.htm"
+    },
+    "arenc": {
+        "name": "Advanced Renamer CLI",
+        "category": "Batch Renaming & EXIF Reorganization",
+        "primary_interface": "Headless CLI (arenc.exe)",
+        "cli_path": r"C:\PortableApps\Advanced renamer portable\arenc.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "arenc.exe -p <rules.aren> -s <source_dir> -d <target_dir>",
+        "docs": "https://www.advancedrenamer.com/user_guide/commandline"
+    },
+    "mp3gain": {
+        "name": "MP3Gain CLI",
+        "category": "Lossless Audio Loudness Normalization",
+        "primary_interface": "Headless CLI (mp3gain.exe)",
+        "cli_path": r"C:\PortableApps\mp3gain-win-full-1_2_5\mp3gain.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "mp3gain.exe -r -k -d 0 <narration.mp3>",
+        "docs": "http://mp3gain.sourceforge.net/"
+    },
+    "imagej": {
+        "name": "ImageJ (NIH)",
+        "category": "Scientific Image Analysis & Morphometry",
+        "primary_interface": "Macro Scripting CLI (ImageJ.exe)",
+        "cli_path": r"C:\PortableApps\ImageJ\ImageJ.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "ImageJ.exe -macro <measure.ijm> <image.tif>",
+        "docs": "https://imagej.net/scripting/macro"
+    },
+    "everything": {
+        "name": "Everything Portable",
+        "category": "Instant NTFS File Indexing",
+        "primary_interface": "Headless CLI (Everything.exe)",
+        "cli_path": r"C:\PortableApps\Everything-1.4.1.928.x64\Everything.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "Everything.exe -search <query> -export-csv <results.csv>",
+        "docs": "https://www.voidtools.com/support/everything/command_line_options/"
+    },
+    "exiftool_portable": {
+        "name": "ExifTool Portable",
+        "category": "Geotagging & Metadata Extraction",
+        "primary_interface": "Headless CLI (exiftool.exe)",
+        "cli_path": r"C:\PortableApps\geosetter\tools\exiftool.exe",
+        "mcp_server": None,
+        "test_cmd": None,
+        "syntax": "exiftool.exe -geotag=<track.gpx> -overwrite_original <images_dir>",
+        "docs": "https://exiftool.org/"
     }
 }
 
@@ -356,6 +458,126 @@ WORKFLOW_SEQUENCES = {
                 "tool": "ppt_master",
                 "role": "Forensic Dossier Presentation",
                 "action": "Generate executive forensic technical slides documenting vulnerability attack surface and logic flow."
+            }
+        ]
+    },
+    "pdf_engineering_dossier": {
+        "title": "Engineering Technical Dossier & PDF Assembly Workflow",
+        "goal": "Compile calculation sheets, drawings, and BOQ into a unified, watermarked, stamped PDF portfolio.",
+        "steps": [
+            {
+                "step": 1,
+                "tool": "autocad",
+                "role": "CAD Drawing Sheet Export",
+                "action": "Run accoreconsole.exe to batch-plot DWG sheets into vector PDF layouts."
+            },
+            {
+                "step": 2,
+                "tool": "pdftk",
+                "role": "Multi-Source PDF Collation & Merging",
+                "action": "Execute pdftk.exe cover.pdf specs.pdf drawings.pdf boq.pdf cat output project_master.pdf."
+            },
+            {
+                "step": 3,
+                "tool": "pdftk",
+                "role": "Confidential Watermarking & Page Numbering",
+                "action": "Execute pdftk.exe project_master.pdf multistamp watermark.pdf output project_dossier_stamped.pdf."
+            },
+            {
+                "step": 4,
+                "tool": "irfanview",
+                "role": "Executive Thumbnail & Preview Generation",
+                "action": "Run i_view64.exe to render high-contrast cover thumbnails for proposal submissions."
+            }
+        ]
+    },
+    "drone_geotag_photogrammetry": {
+        "title": "Drone Aerial Geotagging & GPU Photogrammetry Pipeline",
+        "goal": "Reconcile flight telemetry GPS logs with aerial imagery, solve dense point clouds, and produce terrain models.",
+        "steps": [
+            {
+                "step": 1,
+                "tool": "exiftool_portable",
+                "role": "Telemetry GPS Time-Sync Geotagging",
+                "action": "Execute exiftool.exe -geotag=flight_telemetry.gpx -overwrite_original ./drone_raw_images/ to embed WGS84 coordinates."
+            },
+            {
+                "step": 2,
+                "tool": "colmap",
+                "role": "Structure from Motion & Dense Stereo",
+                "action": "Execute colmap.bat automatic_reconstructor to extract features and solve dense point cloud."
+            },
+            {
+                "step": 3,
+                "tool": "cloudcompare",
+                "role": "Cloud Decimation & Noise Stripping",
+                "action": "Execute CloudCompare.exe -SILENT -O dense.ply -SS SPATIAL 0.05 to clean artifacts and export LAS."
+            },
+            {
+                "step": 4,
+                "tool": "qgis",
+                "role": "Orthomosaic & Contour Generation",
+                "action": "Load ground LAS into QGIS via qgis_agent_mcp to generate 1m topographic contours."
+            }
+        ]
+    },
+    "ai_media_enhancement": {
+        "title": "Audio Normalization & Real-ESRGAN AI Super-Resolution Workflow",
+        "goal": "Produce broadcast-grade documentary footage, upscale historical maps/renderings, and level voiceover tracks.",
+        "steps": [
+            {
+                "step": 1,
+                "tool": "ytdlp",
+                "role": "Reference Footage Retrieval",
+                "action": "Execute yt-dlp.exe to download high-bitrate reference satellite and documentary footage."
+            },
+            {
+                "step": 2,
+                "tool": "realesrgan",
+                "role": "AI 4x Super-Resolution Upscaling",
+                "action": "Execute realesrgan-ncnn-vulkan.exe -i lowres_map.png -o highres_map.png -s 4 to reconstruct fine line work."
+            },
+            {
+                "step": 3,
+                "tool": "mp3gain",
+                "role": "Lossless Audio Loudness Leveling",
+                "action": "Execute mp3gain.exe -r -k -d 0 narration.mp3 to achieve standard ReplayGain broadcast loudness."
+            },
+            {
+                "step": 4,
+                "tool": "ffmpeg",
+                "role": "Bitexact Final Master Assembly",
+                "action": "Run ffmpeg with -map_metadata -1 -fflags +bitexact to assemble final documentary clip without tool footprints."
+            },
+            {
+                "step": 5,
+                "tool": "mediainfo",
+                "role": "Automated Quality Control Gate",
+                "action": "Execute MediaInfo.exe --Output=JSON master.mp4 to verify frame rate, color space, and codec compliance."
+            }
+        ]
+    },
+    "bulk_asset_triage": {
+        "title": "High-Volume Project Asset Indexing & Batch Sanitization",
+        "goal": "Index millions of survey files, apply structured regex naming, and normalize file timestamps.",
+        "steps": [
+            {
+                "step": 1,
+                "tool": "everything",
+                "role": "Instant NTFS Volume Indexing",
+                "action": "Run Everything.exe -search <query> -export-csv project_files.csv to catalog all relevant assets in milliseconds."
+            },
+            {
+                "step": 2,
+                "tool": "arenc",
+                "role": "Programmatic Regex Batch Renaming",
+                "action": "Run arenc.exe -p naming_rules.aren -s <source_dir> to standardize project prefixes and date structures."
+            },
+            {
+                "step": 3,
+                "tool": "irfanview",
+                "role": "Mass Image Thumbnailing & Format Conversion",
+                "action": "Run i_view64.exe to convert heavy TIFF/PNG assets to optimized WebP documentation formats."
             }
         ]
     }
