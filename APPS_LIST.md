@@ -189,6 +189,19 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 
 ---
 
+### 13. Photogrammetry & 3D Reconstruction Suite
+| Tool / Package | Version | Purpose | Installation / Location |
+| :--- | :--- | :--- | :--- |
+| **VisualSFM** | 0.5.26 | Fast Structure from Motion (SfM) GUI & CLI | `C:\tools\photogrammetry\VisualSFM\VisualSFM.exe` |
+| **CMVS / PMVS2** | Win64-VS2010 | Clustering View for Multi-view Stereo & dense point cloud reconstruction | Installed directly into `C:\tools\photogrammetry\VisualSFM\` (`cmvs.exe`, `pmvs2.exe`, `genOption.exe`) |
+| **COLMAP** | 4.2.1 (CPU / No-CUDA) | General-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline | `C:\tools\photogrammetry\COLMAP\bin\colmap.exe` & `COLMAP.bat` |
+| **MeshLab** | 2025.07 | 3D triangular mesh and point cloud processing, cleaning, and Poisson reconstruction | `C:\Program Files\VCG\MeshLab\meshlab.exe` |
+| **Awesome Photogrammetry** | Latest | Curated knowledge base of photogrammetry tools, libraries, and benchmarks | `C:\tools\photogrammetry\awesome-photogrammetry` |
+| **Python 3D Toolkit** | Latest | Point cloud and mesh manipulation (`trimesh`, `scipy`, `numpy`, `plyfile`, `laspy`) | Installed in Python 3.12 environment |
+
+
+---
+
 ## 📋 Installed Chocolatey Packages Snapshot
 
 Exported directly from `docs/installed_choco_packages.txt`:
