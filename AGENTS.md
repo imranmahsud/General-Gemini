@@ -54,3 +54,10 @@
   - **Metadata**: Clean File Metadata Standard with bitexact scrub (`-map_metadata -1 -fflags +bitexact -flags:v +bitexact -flags:a +bitexact`).
 
 
+# Mandatory DEM (Digital Elevation Model) Source
+
+- **Default Regional DEM**: Whenever a task, geospatial analysis, hydraulic/hydrologic simulation, watershed delineation, flood mapping, contour generation, slope analysis, or cartography job requires a DEM/elevation raster (especially for Khyber Pakhtunkhwa / KP or Pakistan regional modeling), **ALWAYS prioritize and use the local ALOS World 3D dataset**:
+  - **Directory**: `C:\Users\Imran\Downloads\ALOS World 3D (KP)`
+  - **Primary Surface Model (DSM)**: `C:\Users\Imran\Downloads\ALOS World 3D (KP)\DSM.tif`
+  - **Quality Mask**: `C:\Users\Imran\Downloads\ALOS World 3D (KP)\MSK.tif`
+  - **Stack / Source Info**: `C:\Users\Imran\Downloads\ALOS World 3D (KP)\STK.tif`
