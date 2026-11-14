@@ -231,6 +231,16 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 | **Deep Task Framework** | Felix Rieseberg | 4-pillar technical deconstruction and rigor enforcement agent skill | Agent skill in `skills/deep-task` |
 | **Synaps App** | Web CAD | AI-assisted architectural floor plan and 2D CAD drafting | `https://synaps.app` (Desktop shortcut: `Synaps App.url`) |
 
+---
+
+### 16. System Optimization & Windows Debloating
+| Component / Policy | Status | Scope & Details | Configuration / Location |
+| :--- | :--- | :--- | :--- |
+| **OneDrive Removal** | Completely Uninstalled | Process terminated, binaries removed, AppX removed, file sync disabled via policy (`DisableFileSyncNGSC = 1`) | Uninstalled via `OneDriveSetup.exe /uninstall`, policy in `HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive` |
+| **Microsoft Edge Browser** | Uninstalled | Standalone Edge browser removed; update reinstallation blocked via `DoNotUpdateToEdgeWithChromium = 1` | `C:\Program Files (x86)\Microsoft\Edge` removed; scheduled tasks pruned |
+| **Microsoft Edge WebView2** | Retained & Active | Critical system runtime preserved for application embedders, UI engines, and hybrid apps | Intact at `C:\Program Files (x86)\Microsoft\EdgeWebView\Application` |
+| **Explorer Navigation Cleanup** | Active | Left navigation pane stripped of Home, Gallery, and OneDrive entries; default landing set to This PC (`LaunchTo = 1`) | CLSID NameSpace entries removed; registry backup preserved in `C:\tools\backup_explorer_keys` |
+
 
 
 
