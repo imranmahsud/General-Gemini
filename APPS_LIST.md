@@ -220,6 +220,18 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 | **CloneSpy** | Latest | Byte-level file deduplication and automated NTFS hardlinking | `C:\PortableApps\01-FILE OPERATION APPS\CloneSpy\CloneSpy.exe` |
 | **DiffMerge Stable** | 4.2.0 | Visual & headless file/directory diff engine | `C:\PortableApps\01-FILE OPERATION APPS\DiffMerge_4_2_0_697_stable_x86\sgdm.exe` |
 
+---
+
+### 15. Semantic Search, Reverse Engineering MCP & Trading Suite
+| Tool / Package | Version | Purpose | Installation / Location |
+| :--- | :--- | :--- | :--- |
+| **Ghidra MCP Server** | 7.0.0 | 200+ MCP tools bridging Ghidra 12.2 disassembler to AI agents | Extension in `C:\ProgramData\chocolatey\lib\ghidra\tools\ghidra_12.2_PUBLIC\Ghidra\Extensions`, Bridge in `bridge-mcp-ghidra.exe` |
+| **DigUp** | 0.7.0-beta.3 | On-device semantic local file search powered by EmbeddingGemma 2 | `C:\tools\DigUp\app\DigUp.exe` (Desktop shortcut: `DigUp.lnk`) |
+| **Vibe-Trading** | 0.1.19 | Personal multi-agent finance, algorithmic backtesting & trading agent | `C:\tools\vibe-trading` (`vibe-trading.exe` & `vibe-trading-mcp.exe`) |
+| **Deep Task Framework** | Felix Rieseberg | 4-pillar technical deconstruction and rigor enforcement agent skill | Agent skill in `skills/deep-task` |
+| **Synaps App** | Web CAD | AI-assisted architectural floor plan and 2D CAD drafting | `https://synaps.app` (Desktop shortcut: `Synaps App.url`) |
+
+
 
 
 ---
