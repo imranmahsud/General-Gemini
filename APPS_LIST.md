@@ -243,6 +243,36 @@ Governed by `cad-bim-drawing-mastery`, `architectural-plan-designer`, and `furni
 
 
 
+### 17. Universal Agentic CLI Shims (`~/.local/bin`)
+All installed and portable applications are unified into zero-overhead CLI shims in `~/.local/bin` (and front-loaded in `~/.gemini/antigravity/bin`), allowing Antigravity agents to execute them instantly via standard command names without guessing paths:
+
+| Command | Target Executable / Script | Role / Capability |
+| :--- | :--- | :--- |
+| `bun` | `C:\tools\bun.exe` | High-speed JavaScript/TypeScript runtime & bundler |
+| `blender` | `C:\Program Files\Blender Foundation\Blender 5.2\blender.exe` | 3D rendering, scene manipulation & headless python scripts (`-b -P`) |
+| `freecad` / `freecadcmd` | `C:\Users\Imran\AppData\Local\Programs\FreeCAD 1.1\bin\FreeCADCmd.exe` | Headless parametric 3D CAD modeling & geometry generation |
+| `swmm5` / `runswmm` | `C:\Program Files\EPA SWMM 5.2.4 (64-bit)\runswmm.exe` | Headless urban drainage and stormwater network simulation |
+| `epanet` / `runepanet` | `C:\Program Files (x86)\EPANET 2.2\runepanet.exe` | Headless pressurized pipe network and hydraulic simulation |
+| `tshark` / `wireshark` | `C:\Program Files\Wireshark\tshark.exe` | Headless network packet capture, dissections & protocol analysis |
+| `cloudcompare` | `C:\Program Files\CloudCompare\CloudCompare.exe` | 3D point cloud registration, subsampling & format conversion |
+| `meshlab` | `C:\Program Files\VCG\MeshLab\meshlab.exe` | 3D mesh processing, simplification & Poisson surface reconstruction |
+| `colmap` | `C:\tools\photogrammetry\COLMAP\COLMAP.bat` | Dense photogrammetry Structure-from-Motion (SfM) pipeline |
+| `visualsfm` | `C:\tools\photogrammetry\VisualSFM\VisualSFM.exe` | Fast Structure from Motion (SfM) GUI & CLI |
+| `ghidra` | `C:\ProgramData\chocolatey\lib\ghidra\tools\ghidra_12.2_PUBLIC\ghidraRun.bat` | NSA reverse engineering suite & headless analyzer |
+| `sumatrapdf` | `C:\Program Files\SumatraPDF\SumatraPDF.exe` | Ultra-fast lightweight PDF viewer & CLI previewer |
+| `pandoc` | `C:\ProgramData\chocolatey\bin\pandoc.exe` | Universal document converter (Markdown, DOCX, HTML, PDF) |
+| `dot` | `C:\Program Files\Graphviz\bin\dot.exe` | Graphviz architecture and dependency graph compiler |
+| `pdftk` | `C:\PortableApps\PDFTKBuilderPortable\App\pdftkbuilder\pdftk.exe` | Headless PDF bursting, stamping, watermarking & merging |
+| `exiftool` | `C:\PortableApps\geosetter\tools\exiftool.exe` | Image and media metadata extraction and modification |
+| `mkvmerge` | `C:\PortableApps\mkvtoolnix\mkvmerge.exe` | Matroska container muxing and stream manipulation |
+| `yt-dlp` | `C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\yt-dlp.exe` | High-bitrate audio/video stream downloader |
+| `mediainfo` | `C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\MediaInfo.exe` | Audio/video stream codec, bitrate, and container audit |
+| `realesrgan` | `C:\PortableApps\Shutter Encoder 19.2 Windows 64bits\Library\realesrgan-ncnn-vulkan.exe` | Vulkan-accelerated 4x AI super-resolution image upscaling |
+| `arenc` | `C:\PortableApps\Advanced renamer portable\arenc.exe` | CLI batch regex file & directory renaming engine |
+| `iview64` | `C:\PortableApps\irfanview462_x64\i_view64.exe` | Batch image conversion, format transcoding & transformations |
+| `kpk-mrs` | `C:\tools\civil-hydraulics\kpk-mrs\mrs_lookup.py` | Instant lookup CLI for Khyber Pakhtunkhwa MRS-2025 item rates |
+| `python` | `C:\Users\Imran\AppData\Local\Programs\Python\Python312\python.exe` | Standard Python 3.12 runtime with zero library prefix warnings |
+
 ---
 
 ## 📋 Installed Chocolatey Packages Snapshot
