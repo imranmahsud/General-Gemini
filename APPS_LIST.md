@@ -272,6 +272,26 @@ All installed and portable applications are unified into zero-overhead CLI shims
 | `iview64` | `C:\PortableApps\irfanview462_x64\i_view64.exe` | Batch image conversion, format transcoding & transformations |
 | `kpk-mrs` | `C:\tools\civil-hydraulics\kpk-mrs\mrs_lookup.py` | Instant lookup CLI for Khyber Pakhtunkhwa MRS-2025 item rates |
 | `python` | `C:\Users\Imran\AppData\Local\Programs\Python\Python312\python.exe` | Standard Python 3.12 runtime with zero library prefix warnings |
+| `cadcraft` | `C:\tools\cadcraft.bat` | 2D/3D CAD, DWG/DXF/SVG/PDF conversion, headless plotting, MCP stdio |
+| `filmcraft` | `C:\tools\filmcraft.bat` | Headless NLE video timeline, cuts, EDL/XML assembly, grading |
+| `anicraft` | `C:\tools\anicraft.bat` | Headless 2D/3D animation engine, character rigs & keyframes |
+| `photocraft` | `C:\tools\photocraft.bat` | Photoshop-style raster photo editing, layer masks, batch droplets |
+| `vectorcraft` | `C:\tools\vectorcraft.bat` | Vector illustration, Bezier geometry, SVG generation |
+| `figcraft` | `C:\tools\figcraft.bat` | Headless Figma-compatible vector UI design engine & components |
+| `soundcraft` | `C:\tools\soundcraft.bat` | Digital audio workstation (DAW), multitrack mixing & cleanup |
+| `effectcraft` | `C:\tools\effectcraft.bat` | VFX compositor, particle systems, procedural shaders |
+| `deckcraft` | `C:\tools\deckcraft.bat` | Slide presentations (.deckcraft, PPTX) automated authoring |
+| `gridcraft` | `C:\tools\gridcraft.bat` | High-throughput spreadsheet & data grid engine (XLSX, CSV) |
+| `pdfcraft` | `C:\tools\pdfcraft.bat` | PDF processing with built-in ONNX deep OCR text detection/recognition |
+| `lightcraft` | `C:\tools\lightcraft.bat` | RAW photography developer, batch exposure & catalog indexing |
+| `designcraft` | `C:\tools\designcraft.bat` | Print publication layout, flyers, brochures, bleed & trim |
+| `wordcraft` | `C:\tools\wordcraft.bat` | Document publishing, typography, markdown to DOCX/PDF |
+| `rea-video` | `C:\tools\rea-video.bat` | Shot-by-shot video reverse-engineering & reproduction blueprint |
+| `openchatcut` | `C:\tools\openchatcut.bat` | Conversational timeline video editor powered by Remotion + MCP |
+| `bambooai` | `C:\tools\bambooai.bat` | Transparent AI data analyst with validated step-by-step evidence |
+| `openfilm` | `C:\tools\openfilm.bat` | AI video creation CLI & format |
+| `pascal-editor` | `C:\tools\pascal_editor.bat` | Pascal 3D Architecture web editor on port 3002 |
+| `rvt-mcp` | `C:\tools\rvt-mcp.bat` | Autodesk Revit MCP Server (Revit 2022-2027) |
 
 ---
 
