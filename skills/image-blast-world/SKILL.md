@@ -1,7 +1,7 @@
 ---
 name: image-blast-world
 description: Generate the 3D static environment of a world from a source or plate image.
-argument-hint: [world-name] [optional image path or world prompt]
+argument-hint: "[world-name] [optional image path or world prompt]"
 allowed-tools: Read Write Glob Bash(ls *) Bash(node .claude/scripts/project/project-state.mjs *) Bash(node .claude/scripts/project/ensure-local-assets.mjs *) Bash(node .claude/scripts/world/generate-world.mjs *)
 context: fork
 agent: image-blast-world

@@ -1,6 +1,6 @@
 ---
 name: documentary002
-description: Forensic engineering and technical incident documentary video style using HyperFrames, locked-in neural voiceover and audio architecture from documentary001 (code word: documentary002). Use whenever the user mentions 'documentary002' or requests a documentary in this style.
+description: "Forensic engineering and technical incident documentary video style using HyperFrames, locked-in neural voiceover and audio architecture from documentary001 (code word: documentary002). Use whenever the user mentions 'documentary002' or requests a documentary in this style."
 ---
 
 # Documentary 002: Forensic Engineering Video Style

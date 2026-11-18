@@ -1,7 +1,7 @@
 ---
 name: image-blast-3d
 description: Generate one specified atomic 3D object. Use when the user names exactly one object instance to make, or provides one image plus the object name/description.
-argument-hint: [world-name] [object-id/name or image path + object description] [--image-edit-prompt prompt] [--provider meshy|hunyuan] [--regenerate] [--regenerate-reference] [--target-polycount N] [--face-count N] [--generate-type Normal|LowPoly|Geometry] [--polygon-type triangle|quadrilateral] [--enable-pbr true|false]
+argument-hint: "[world-name] [object-id/name or image path + object description] [--image-edit-prompt prompt] [--provider meshy|hunyuan] [--regenerate] [--regenerate-reference] [--target-polycount N] [--face-count N] [--generate-type Normal|LowPoly|Geometry] [--polygon-type triangle|quadrilateral] [--enable-pbr true|false]"
 allowed-tools: Read Write Glob Bash(ls *) Bash(node .claude/scripts/project/project-state.mjs *) Bash(node .claude/scripts/project/ensure-local-assets.mjs *) Bash(node .claude/scripts/asset-pipeline/generate-single-asset.mjs *)
 context: fork
 agent: image-blast-3d

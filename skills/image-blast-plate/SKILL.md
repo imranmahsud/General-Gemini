@@ -1,7 +1,7 @@
 ---
 name: image-blast-plate
 description: Generate one clean plate/source cleanup image for an IMAGE-BLASTER world. Use after confirmed objects exist, when removing foreground objects or other specified content from a source image.
-argument-hint: [world-name] [optional source image or extra removal instructions]
+argument-hint: "[world-name] [optional source image or extra removal instructions]"
 allowed-tools: Read Write Glob Bash(ls *) Bash(node .claude/scripts/project/project-state.mjs *) Bash(node .claude/scripts/project/ensure-local-assets.mjs *) Bash(node .claude/scripts/image-edit/generate-edit.mjs *)
 context: fork
 agent: image-blast-plate

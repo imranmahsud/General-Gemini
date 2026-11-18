@@ -1,7 +1,7 @@
 ---
 name: image-blast-wildcard
 description: Discover and run any FAL API model or operation the user requests. Use this as a generic FAL escape hatch when the user wants to generate something that does not fit a narrower Image Blast skill.
-argument-hint: [FAL model/endpoint or natural request] [inputs, prompt, files, output location]
+argument-hint: "[FAL model/endpoint or natural request] [inputs, prompt, files, output location]"
 allowed-tools: Read Write Glob WebFetch WebSearch Bash(ls *) Bash(node .claude/scripts/project/ensure-local-assets.mjs *) Bash(node .claude/scripts/fal/run-fal.mjs *)
 ---
 
