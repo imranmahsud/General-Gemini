@@ -287,6 +287,10 @@ All installed and portable applications are unified into zero-overhead CLI shims
 | `designcraft` | `C:\tools\designcraft.bat` | Print publication layout, flyers, brochures, bleed & trim |
 | `wordcraft` | `C:\tools\wordcraft.bat` | Document publishing, typography, markdown to DOCX/PDF |
 | `rea-video` | `C:\tools\rea-video.bat` | Shot-by-shot video reverse-engineering & reproduction blueprint |
+| `re-index` | `C:\tools\re-index.bat` | Search index of 17,000+ reverse-engineered tools, APIs & file formats |
+| `frida` | `C:\tools\frida.bat` | Dynamic binary instrumentation, memory hooking & script injection (v17.27) |
+| `ilspycmd` | `C:\tools\ilspycmd.bat` | High-performance .NET/C# assembly decompiler CLI (v9.0.0) |
+| `bla` | `C:\tools\bla.bat` | Blind LLM Agents (BLA) defensive security MCP server protecting code against REA |
 | `openchatcut` | `C:\tools\openchatcut.bat` | Conversational timeline video editor powered by Remotion + MCP |
 | `bambooai` | `C:\tools\bambooai.bat` | Transparent AI data analyst with validated step-by-step evidence |
 | `openfilm` | `C:\tools\openfilm.bat` | AI video creation CLI & format |
