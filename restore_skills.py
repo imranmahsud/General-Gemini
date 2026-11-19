@@ -103,6 +103,15 @@ def main():
         os.path.join(sb_dir, "COG-second-brain"): "https://github.com/huytieu/COG-second-brain.git",
     }
 
+    # Install Ollama & Chatbox for Daily Local LLM Execution
+    print("\nEnsuring Ollama and Chatbox are installed via winget...")
+    try:
+        subprocess.run(["winget", "install", "--id", "Ollama.Ollama", "--accept-source-agreements", "--accept-package-agreements", "--silent"], check=False)
+        subprocess.run(["winget", "install", "--id", "Bin-Huang.Chatbox", "--accept-source-agreements", "--accept-package-agreements", "--silent"], check=False)
+        print("  [OK] Ollama and Chatbox checked.")
+    except Exception as e:
+        print(f"  [WARN] Note on Ollama/Chatbox setup: {e}")
+
     print("\nEnsuring AI Tools & Repositories are cloned...")
     for target_path, repo_url in git_repos.items():
         if not os.path.exists(target_path):
