@@ -72,6 +72,49 @@ def main():
     except Exception as e:
         print(f"  [WARN] Note on whisper-ctranslate2 install: {e}")
 
+    # Install OpenVINO
+    print("\nEnsuring OpenVINO is installed...")
+    try:
+        subprocess.run([sys.executable, "-m", "pip", "install", "openvino"], check=True)
+        print("  [OK] openvino installed successfully.")
+    except Exception as e:
+        print(f"  [WARN] Note on openvino install: {e}")
+
+    # Clone tools ecosystem if missing
+    tools_dir = "C:\\tools" if sys.platform == "win32" else os.path.expanduser("~/tools")
+    os.makedirs(tools_dir, exist_ok=True)
+    sb_dir = os.path.join(tools_dir, "second-brain-suite")
+    os.makedirs(sb_dir, exist_ok=True)
+
+    git_repos = {
+        os.path.join(tools_dir, "ai-engineering-hub"): "https://github.com/patchy631/ai-engineering-hub.git",
+        os.path.join(tools_dir, "awesome-mcp-servers"): "https://github.com/punkpeye/awesome-mcp-servers.git",
+        os.path.join(tools_dir, "Wan-Video"): "https://github.com/Wan-Video/Wan2.1.git",
+        os.path.join(tools_dir, "LTX-Video"): "https://github.com/Lightricks/LTX-2.git",
+        os.path.join(tools_dir, "Z-Image"): "https://github.com/Tongyi-MAI/Z-Image.git",
+        os.path.join(sb_dir, "gbrain"): "https://github.com/garrytan/gbrain.git",
+        os.path.join(sb_dir, "llm-wiki"): "https://github.com/lucasastorian/llmwiki.git",
+        os.path.join(sb_dir, "obsidian-skills"): "https://github.com/obsidianmd/obsidian-skills.git",
+        os.path.join(sb_dir, "knowledge-work-plugins"): "https://github.com/anthropics/knowledge-work-plugins.git",
+        os.path.join(sb_dir, "openai-skills"): "https://github.com/openai/skills.git",
+        os.path.join(sb_dir, "khoj"): "https://github.com/khoj-ai/khoj.git",
+        os.path.join(sb_dir, "ai-memory"): "https://github.com/akitaonrails/ai-memory.git",
+        os.path.join(sb_dir, "basic-memory"): "https://github.com/basicmachines-co/basic-memory.git",
+        os.path.join(sb_dir, "COG-second-brain"): "https://github.com/huytieu/COG-second-brain.git",
+    }
+
+    print("\nEnsuring AI Tools & Repositories are cloned...")
+    for target_path, repo_url in git_repos.items():
+        if not os.path.exists(target_path):
+            print(f"  [CLONING] {repo_url} -> {target_path}")
+            try:
+                subprocess.run(["git", "clone", "--depth", "1", repo_url, target_path], check=True)
+            except Exception as e:
+                print(f"  [WARN] Failed to clone {repo_url}: {e}")
+        else:
+            print(f"  [OK] Already present: {os.path.basename(target_path)}")
+
+
     print("\n==================================================")
     print(" Skills restoration complete! Ready to use on this PC.")
     print("==================================================")
