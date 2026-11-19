@@ -109,6 +109,17 @@ def main():
         subprocess.run(["winget", "install", "--id", "Ollama.Ollama", "--accept-source-agreements", "--accept-package-agreements", "--silent"], check=False)
         subprocess.run(["winget", "install", "--id", "Bin-Huang.Chatbox", "--accept-source-agreements", "--accept-package-agreements", "--silent"], check=False)
         print("  [OK] Ollama and Chatbox checked.")
+        
+        # Create helper launchers
+        if sys.platform == "win32":
+            qwen_bat = os.path.join(tools_dir, "qwen.bat")
+            with open(qwen_bat, "w") as f:
+                f.write('@echo off\nset OLLAMA_KEEP_ALIVE=5m\ncurl.exe -s http://127.0.0.1:11434/ >nul 2>&1\nif errorlevel 1 (\n    start "" /b "%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe" serve\n    timeout /t 2 /nobreak >nul\n)\n"%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe" run qwen2.5:7b %*\n')
+            
+            chatbox_bat = os.path.join(tools_dir, "chatbox.bat")
+            with open(chatbox_bat, "w") as f:
+                f.write('@echo off\nset OLLAMA_KEEP_ALIVE=5m\ncurl.exe -s http://127.0.0.1:11434/ >nul 2>&1\nif errorlevel 1 (\n    start "" /b "%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe" serve\n    timeout /t 2 /nobreak >nul\n)\nstart "" "%LOCALAPPDATA%\\Programs\\chatbox\\Chatbox.exe"\n')
+            print("  [OK] Launchers created: qwen.bat and chatbox.bat")
     except Exception as e:
         print(f"  [WARN] Note on Ollama/Chatbox setup: {e}")
 
