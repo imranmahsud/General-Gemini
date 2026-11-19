@@ -40,6 +40,8 @@ $shims = @{
     "iview64.cmd"     = '@"C:\PortableApps\irfanview462_x64\i_view64.exe" %*'
     "kpk-mrs.cmd"     = '@"C:\Users\Imran\AppData\Local\Programs\Python\Python312\python.exe" "C:\tools\civil-hydraulics\kpk-mrs\mrs_lookup.py" %*'
     "python.cmd"      = '@"C:\Users\Imran\AppData\Local\Programs\Python\Python312\python.exe" %*'
+    "ollama.cmd"      = '@"C:\Users\Imran\AppData\Local\Programs\Ollama\ollama.exe" %*'
+    "ollama-agent.cmd"= '@"C:\Users\Imran\AppData\Local\Programs\Python\Python312\python.exe" "C:\tools\ollama-mcp-agent\ollama_agent.py" %*'
 }
 
 foreach ($name in $shims.Keys) {
