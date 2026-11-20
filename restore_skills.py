@@ -101,6 +101,9 @@ def main():
         os.path.join(sb_dir, "ai-memory"): "https://github.com/akitaonrails/ai-memory.git",
         os.path.join(sb_dir, "basic-memory"): "https://github.com/basicmachines-co/basic-memory.git",
         os.path.join(sb_dir, "COG-second-brain"): "https://github.com/huytieu/COG-second-brain.git",
+        os.path.join(tools_dir, "qgis-ai-segmentation"): "https://github.com/TerraLabAI/QGIS_AI-Segmentation.git",
+        os.path.join(tools_dir, "motion-canvas"): "https://github.com/motion-canvas/motion-canvas.git",
+        os.path.join(tools_dir, "DabbleCAD"): "https://github.com/DJMcNewgent/DabbleCAD.git",
     }
 
     # Install Ollama & Chatbox for Daily Local LLM Execution
@@ -133,6 +136,39 @@ def main():
                 print(f"  [WARN] Failed to clone {repo_url}: {e}")
         else:
             print(f"  [OK] Already present: {os.path.basename(target_path)}")
+
+    # Ensure DabbleCAD portable binary & launcher
+    dabblecad_app = os.path.join(tools_dir, "DabbleCAD-app")
+    if sys.platform == "win32" and not os.path.exists(os.path.join(dabblecad_app, "DabbleCAD.exe")):
+        print("\nDownloading DabbleCAD portable...")
+        try:
+            import urllib.request, zipfile, io
+            url = "https://github.com/DJMcNewgent/DabbleCAD/releases/download/v1.2.0/DabbleCAD-1.2.0-win-x64.zip"
+            os.makedirs(dabblecad_app, exist_ok=True)
+            data = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=120).read()
+            z = zipfile.ZipFile(io.BytesIO(data))
+            z.extractall(dabblecad_app)
+            print("  [OK] DabbleCAD extracted.")
+        except Exception as e:
+            print(f"  [WARN] DabbleCAD portable download note: {e}")
+
+    if sys.platform == "win32":
+        dabble_bat = os.path.join(tools_dir, "dabblecad.bat")
+        with open(dabble_bat, "w") as f:
+            f.write('@echo off\nstart "" "C:\\tools\\DabbleCAD-app\\DabbleCAD.exe" %*\n')
+
+        motion_bat = os.path.join(tools_dir, "motion-canvas.bat")
+        with open(motion_bat, "w") as f:
+            f.write('@echo off\ncd /d "C:\\tools\\motion-canvas"\nstart "" http://localhost:9000\nnpm run template:dev\n')
+
+        # Install QGIS AI Segmentation plugin into active QGIS profile
+        qgis_plugins = os.path.expandvars(r"%APPDATA%\QGIS\QGIS3\profiles\default\python\plugins")
+        if os.path.exists(qgis_plugins):
+            dest_qgis_plugin = os.path.join(qgis_plugins, "AI_Segmentation")
+            src_qgis_plugin = os.path.join(tools_dir, "qgis-ai-segmentation")
+            if os.path.exists(src_qgis_plugin) and not os.path.exists(dest_qgis_plugin):
+                shutil.copytree(src_qgis_plugin, dest_qgis_plugin, dirs_exist_ok=True)
+                print("  [OK] AI_Segmentation plugin linked to QGIS.")
 
 
     print("\n==================================================")
