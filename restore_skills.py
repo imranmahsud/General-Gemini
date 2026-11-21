@@ -104,6 +104,15 @@ def main():
         os.path.join(tools_dir, "qgis-ai-segmentation"): "https://github.com/TerraLabAI/QGIS_AI-Segmentation.git",
         os.path.join(tools_dir, "motion-canvas"): "https://github.com/motion-canvas/motion-canvas.git",
         os.path.join(tools_dir, "DabbleCAD"): "https://github.com/DJMcNewgent/DabbleCAD.git",
+        os.path.join(tools_dir, "bitnet"): "https://github.com/microsoft/BitNet.git",
+        os.path.join(tools_dir, "rust-anything"): "https://github.com/erkamyaman/rust-anything.git",
+        os.path.join(tools_dir, "open-generative-ai"): "https://github.com/Anil-matcha/Open-Generative-AI.git",
+        os.path.join(tools_dir, "harness2"): "https://github.com/google-research/harness2.git",
+        os.path.join(tools_dir, "spiderfoot"): "https://github.com/smicallef/spiderfoot.git",
+        os.path.join(tools_dir, "agent-client-protocol"): "https://github.com/agentclientprotocol/agent-client-protocol.git",
+        os.path.join(tools_dir, "openworker"): "https://github.com/andrewyng/openworker.git",
+        os.path.join(tools_dir, "elephant-goldfish-model"): "https://github.com/google/elephant-goldfish-model.git",
+        os.path.join(tools_dir, "opentoonz"): "https://github.com/opentoonz/opentoonz.git",
     }
 
     # Install Ollama & Chatbox for Daily Local LLM Execution
