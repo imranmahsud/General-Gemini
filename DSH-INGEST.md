@@ -18,9 +18,9 @@ every skill there is available in every workspace without copying it into a proj
 
 ## What was installed
 
-- **1086 skill bundles** from 986 top-level `skills/*` folders plus 100 from the ten skill-bearing
-  plugins (Flutter 25, science 41, data-agent-kit 24, Gemini API 3, modern-web 2, one each for
-  Calendar/Docs/Drive/Sheets/Slides).
+- **1086 skill bundles** from the 987 skill folders in `skills/` plus 99 unique skills from the ten
+  skill-bearing plugins (Flutter 25, science 41, data-agent-kit 24, Gemini API 3, modern-web 2, one
+  each for Calendar/Docs/Drive/Sheets/Slides).
 - Every skill parsed and validated: kebab-case name ≤ 64 chars, non-empty description, `SKILL.md`
   present, no duplicate names. 18 clashes were suffixed (`design-system-2`, `bigquery-ai-ml-2`, …)
   and 14 identical copies skipped.
@@ -31,10 +31,11 @@ every skill there is available in every workspace without copying it into a proj
 
 A full-library catalog is inlined into every session, so it is split:
 
-- **507 skills are model-invocable** — the agent sees them in `<available_skills>` and can load them.
-- **579 are user-invocable only** — `ecc-*` (311), `trade-*` (74), `gsd-*` (72), `cli-anything-*` (69),
-  `mp-*` (38), `sp-*` (15) carry `disable-model-invocation: true` in their installed frontmatter. They
-  stay on disk and load with `/name`, but cost no prompt space until invoked.
+- **499 skills are model-invocable** — the agent sees them in `<available_skills>` and can load them.
+- **587 are user-invocable only** — `ecc-*` (311), `trade-*` (74), `gsd-*` (72), `cli-anything-*` (69),
+  `mp-*` (38), `sp-*` (15), plus 8 that shipped with the flag. They carry
+  `disable-model-invocation: true` in their installed frontmatter: still on disk, still loadable with
+  `/name`, but they cost no prompt space until invoked.
 - `catalogDescriptionMaxLength: 100` is set on `@deepseek-ai/dsh-tool-skill` in the profile patch, so
   rendered descriptions stay short (the full description still arrives when a skill loads).
 
