@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Univer Sheets Studio</title>
+  <link rel="stylesheet" href="https://unpkg.com/@univerjs/design@latest/lib/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/@univerjs/ui@latest/lib/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/@univerjs/sheets-ui@latest/lib/index.css">
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: Inter, sans-serif; }
+    #app { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module">
+    import { Univer, LocaleType } from 'https://esm.sh/@univerjs/core@latest';
+    import { defaultTheme } from 'https://esm.sh/@univerjs/design@latest';
+    import { UniverRenderEnginePlugin } from 'https://esm.sh/@univerjs/engine-render@latest';
+    import { UniverFormulaEnginePlugin } from 'https://esm.sh/@univerjs/engine-formula@latest';
+    import { UniverUIPlugin } from 'https://esm.sh/@univerjs/ui@latest';
+    import { UniverSheetsPlugin } from 'https://esm.sh/@univerjs/sheets@latest';
+    import { UniverSheetsUIPlugin } from 'https://esm.sh/@univerjs/sheets-ui@latest';
+
+    const univer = new Univer({ theme: defaultTheme, locale: LocaleType.EN_US });
+    univer.registerPlugin(UniverRenderEnginePlugin);
+    univer.registerPlugin(UniverFormulaEnginePlugin);
+    univer.registerPlugin(UniverUIPlugin, { container: 'app' });
+    univer.registerPlugin(UniverSheetsPlugin);
+    univer.registerPlugin(UniverSheetsUIPlugin);
+
+    univer.createUniverDoc({
+      id: 'workbook-1',
+      sheetOrder: ['sheet1'],
+      sheets: {
+        sheet1: {
+          id: 'sheet1',
+          name: 'Civil BOQ & Costing',
+          cellData: {
+            0: { 0: { v: 'Item No' }, 1: { v: 'Description' }, 2: { v: 'Unit' }, 3: { v: 'Quantity' }, 4: { v: 'Rate (PKR)' }, 5: { v: 'Amount (PKR)' } },
+            1: { 0: { v: '1' }, 1: { v: 'Excavation in open cutting' }, 2: { v: 'Cu.M' }, 3: { v: 1500 }, 4: { v: 285.50 }, 5: { f: '=D2*E2' } },
+            2: { 0: { v: '2' }, 1: { v: 'PCC 1:2:4 in foundation' }, 2: { v: 'Cu.M' }, 3: { v: 450 }, 4: { v: 14500.00 }, 5: { f: '=D3*E3' } },
+            3: { 0: { v: '3' }, 1: { v: 'Reinforced concrete 1:1.5:3' }, 2: { v: 'Cu.M' }, 3: { v: 320 }, 4: { v: 22800.00 }, 5: { f: '=D4*E4' } },
+            4: { 1: { v: 'Total Estimated Cost' }, 5: { f: '=SUM(F2:F4)' } }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "dak-notebook": {
+      "command": "node",
+      "type": "stdio",
+      "args": [
+        "mcp/dist/index.js",
+        "--mode=notebook"
+      ]
+    },
+    "dak-viz": {
+      "command": "node",
+      "type": "stdio",
+      "args": [
+        "mcp/dist/index.js",
+        "--mode=visualization"
+      ]
+    }
+  }
+}

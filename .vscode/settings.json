@@ -1,0 +1,16 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+  "python.analysis.extraPaths": [
+    "C:/Program Files/QGIS 4.2.3/apps/qgis/python",
+    "C:/Program Files/QGIS 4.2.3/apps/qgis/python/plugins",
+    "C:/Program Files/QGIS 4.2.3/apps/grass/grass85/etc/python",
+    "C:/Program Files/SAGA"
+  ],
+  "terminal.integrated.env.windows": {
+    "QGIS_PREFIX_PATH": "C:/Program Files/QGIS 4.2.3/apps/qgis",
+    "GDAL_DATA": "C:/Program Files/QGIS 4.2.3/apps/gdal/share/gdal",
+    "PROJ_DATA": "C:/Program Files/QGIS 4.2.3/share/proj",
+    "SAGA_PATH": "C:/Program Files/SAGA",
+    "PYTHONPATH": "${workspaceFolder}/.venv/Lib/site-packages;C:/Program Files/QGIS 4.2.3/apps/qgis/python;C:/Program Files/QGIS 4.2.3/apps/qgis/python/plugins"
+  }
+}

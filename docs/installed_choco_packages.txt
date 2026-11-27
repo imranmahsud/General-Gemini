@@ -1,0 +1,17 @@
+﻿adb|37.0.0
+apktool|3.0.3
+chocolatey|2.7.5
+chocolatey-compatibility.extension|1.0.0
+chocolatey-core.extension|1.4.0
+chocolatey-windowsupdate.extension|1.0.5
+ghidra|12.2.0
+jadx|1.5.6
+javaruntime|8.0.431
+jre8|8.0.511
+KB2919355|1.0.20160915
+KB2919442|1.0.20160915
+KB2999226|1.0.20181019
+KB3033929|1.0.5
+KB3035131|1.0.3
+vcredist140|14.52.37029
+wireshark|4.6.9

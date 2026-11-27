@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "qgis_agent_mcp": {
+      "command": "C:\\Users\\Imran\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\qgis-mcp.exe",
+      "args": [],
+      "description": "Primary QGIS Agent MCP for geospatial data analysis, shapefiles, DEM, and cartography"
+    },
+    "rvt-mcp": {
+      "command": "C:\\Users\\Imran\\AppData\\Local\\Bimwright\\rvt-mcp\\server\\current\\rvt-mcp.exe",
+      "args": [],
+      "description": "Autodesk Revit 2027 BIM MCP Server (242 modeling and documentation tools)"
+    },
+    "hecras_agent_mcp": {
+      "command": "C:\\Users\\Imran\\Downloads\\AG-General\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\tools\\hecras-mcp\\server.py"
+      ],
+      "description": "HEC-RAS 7.0 river hydraulics and simulation MCP Server"
+    }
+  }
+}
